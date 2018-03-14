@@ -161,12 +161,18 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
+    public function getEmail()
+    {
+        return $this->getUsername() . "@cis.aichi-pu.ac.jp";
+    }
+
     public function serialize()
     {
         return serialize(array(
             $this->id,
             $this->username,
             $this->password,
+            $this->roles,
         ));
     }
 
@@ -176,6 +182,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->roles,
             ) = unserialize($serialized);
     }
 }

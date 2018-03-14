@@ -16,12 +16,18 @@ class UserRegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('username', TextType::class, [
+                'label' => '学籍番号'
+            ])
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
+                'first_options'  => [
+                    'label' => 'パスワード',
+                ],
+                'second_options' => [
+                    'label' => 'パスワード(再入力)',
+                ],
+            ])
         ;
     }
 

@@ -25,9 +25,12 @@ class SecurityController extends Controller
             'username' => $lastUsername]
         );
 
+        if ($error) {
+            $this->addFlash('danger', $error->getMessage());
+        }
+
         return $this->render("Front/security/login.html.twig", [
             'form' => $form->createView(),
-            'error' => $error,
         ]);
     }
 
