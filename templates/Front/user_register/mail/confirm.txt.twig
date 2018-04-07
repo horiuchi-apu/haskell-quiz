@@ -1,0 +1,13 @@
+{% extends 'mail.txt.twig' %}
+
+{% block subject %}Haskell Quiz へようこそ{% endblock %}
+{% block to %}{{ user.email }}{% endblock %}
+{% block body %}
+{{ user.username }} 様
+
+Haskell Quiz へのご登録ありがとうございます。
+以下のアドレスをクリックして本登録を完了してください。
+
+{{ user.confirmToken }}
+
+{% endblock %}

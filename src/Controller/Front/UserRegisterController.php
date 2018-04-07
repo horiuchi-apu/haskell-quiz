@@ -65,17 +65,9 @@ class UserRegisterController extends Controller
 
             $this->get('session')->remove(self::USER_REGISTER_KEY);
 
-            $message = (new \Swift_Message('登録'))
-                ->setFrom('haskell.quiz@gmail.com')
-                ->setTo($user->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'Front/user_register/mail/confirm.html.twig'
-                    ),
-                    'text/html'
-                );
-
-            $mailer->send($message);
+            $mailer->send('Front/user_register/mail/confirm.txt.twig', [
+                'user' => $user
+            ]);
 
             $this->addFlash('success', "{$user->getEmail()}にメールを送信しました。確認してください。");
             return $this->redirectToRoute('front_index');
@@ -86,6 +78,4 @@ class UserRegisterController extends Controller
             'user' => $user,
         ]);
     }
-
-
 }
