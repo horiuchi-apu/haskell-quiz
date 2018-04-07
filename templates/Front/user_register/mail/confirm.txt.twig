@@ -8,6 +8,8 @@
 Haskell Quiz へのご登録ありがとうございます。
 以下のアドレスをクリックして本登録を完了してください。
 
-{{ user.confirmToken }}
+{{ url('user_register_confirm_email', {token: user.confirmToken}) }}
+
+※当メールに心当たりの無い場合は、誠に恐れ入りますが破棄して頂けますよう、よろしくお願い致します。
 
 {% endblock %}

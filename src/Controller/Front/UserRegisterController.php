@@ -4,6 +4,7 @@ namespace App\Controller\Front;
 
 use App\Entity\User;
 use App\Form\UserRegisterType;
+use App\Repository\UserRepository;
 use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,6 +61,9 @@ class UserRegisterController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $token = $this->genToken();
+            $user->setConfirmToken($token);
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -77,5 +81,36 @@ class UserRegisterController extends Controller
             'form' => $form->createView(),
             'user' => $user,
         ]);
+    }
+
+    /**
+     * @Route("/confirm/email/{token}", name="user_register_confirm_email")
+     */
+    public function confirmEmail($token, EntityManagerInterface $entityManager, UserRepository $repository)
+    {
+        $user = $repository->findOneBy(['confirmToken' => $token]);
+
+        if ($user) {
+            $user->setIsEnabled(true);
+            $user->setConfirmToken('');
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', "登録が完了しました。ログインしてください。");
+        }
+
+        return $this->redirectToRoute('front_index');
+    }
+
+    private function genToken()
+    {
+        try {
+            $token = bin2hex(random_bytes(16));
+        } catch (\Exception $e) {
+            $token = md5(uniqid(rand(), true));
+        }
+
+        return $token;
     }
 }

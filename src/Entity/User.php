@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     message="既に登録されています"
  * )
  */
-class User implements UserInterface
+class User implements AdvancedUserInterface
 {
     /**
      * @ORM\Id
@@ -56,7 +56,22 @@ class User implements UserInterface
      * @var bool
      * @ORM\Column(type="boolean", nullable=false)
      */
-    private $isEnable;
+    private $isEnabled;
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
 
     /**
      * @var array
@@ -67,7 +82,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->setRoles(['ROLE_USER']);
-        $this->setIsEnable(false);
+        $this->setIsEnabled(false);
     }
 
     public function getId()
@@ -150,18 +165,18 @@ class User implements UserInterface
     /**
      * @return bool
      */
-    public function isEnable(): bool
+    public function isEnabled(): bool
     {
-        return $this->isEnable;
+        return $this->isEnabled;
     }
 
     /**
-     * @param bool $isEnable
+     * @param bool $isEnabled
      * @return $this
      */
-    public function setIsEnable(bool $isEnable): User
+    public function setIsEnabled(bool $isEnabled): User
     {
-        $this->isEnable = $isEnable;
+        $this->isEnabled = $isEnabled;
         return $this;
     }
 
@@ -223,7 +238,7 @@ class User implements UserInterface
             $this->username,
             $this->password,
             $this->confirmToken,
-            $this->isEnable,
+            $this->isEnabled,
             $this->roles,
         ));
     }
@@ -235,7 +250,7 @@ class User implements UserInterface
             $this->username,
             $this->password,
             $this->confirmToken,
-            $this->isEnable,
+            $this->isEnabled,
             $this->roles,
             ) = unserialize($serialized);
     }
