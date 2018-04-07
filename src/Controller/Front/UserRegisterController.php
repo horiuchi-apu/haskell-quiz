@@ -4,11 +4,15 @@ namespace App\Controller\Front;
 
 use App\Entity\User;
 use App\Form\UserRegisterType;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/user/register")
@@ -46,7 +50,7 @@ class UserRegisterController extends Controller
     /**
      * @Route("/confirm", name="user_register_confirm")
      */
-    public function confirm(Request $request, EntityManagerInterface $entityManager)
+    public function confirm(Request $request, EntityManagerInterface $entityManager, Mailer $mailer)
     {
         if (null === $user = $this->get('session')->get(self::USER_REGISTER_KEY)) {
             return $this->redirectToRoute('user_register_index');
@@ -61,7 +65,19 @@ class UserRegisterController extends Controller
 
             $this->get('session')->remove(self::USER_REGISTER_KEY);
 
-            $this->addFlash('success', '登録しました。');
+            $message = (new \Swift_Message('登録'))
+                ->setFrom('haskell.quiz@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'Front/user_register/mail/confirm.html.twig'
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
+            $this->addFlash('success', "{$user->getEmail()}にメールを送信しました。確認してください。");
             return $this->redirectToRoute('front_index');
         }
 
@@ -70,4 +86,6 @@ class UserRegisterController extends Controller
             'user' => $user,
         ]);
     }
+
+
 }

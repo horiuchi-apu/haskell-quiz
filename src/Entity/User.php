@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     message="既に登録されています"
  * )
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -45,6 +45,19 @@ class User implements UserInterface, \Serializable
      */
     private $plainPassword;
 
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $confirmToken;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $isEnable;
+
     /**
      * @var array
      * @ORM\Column(type="array")
@@ -54,6 +67,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->setRoles(['ROLE_USER']);
+        $this->setIsEnable(false);
     }
 
     public function getId()
@@ -118,16 +132,52 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
+    public function getConfirmToken(): ?string
+    {
+        return $this->confirmToken;
+    }
+
+    /**
+     * @param string|null $confirmToken
+     * @return $this
+     */
+    public function setConfirmToken($confirmToken): User
+    {
+        $this->confirmToken = $confirmToken;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnable(): bool
+    {
+        return $this->isEnable;
+    }
+
+    /**
+     * @param bool $isEnable
+     * @return $this
+     */
+    public function setIsEnable(bool $isEnable): User
+    {
+        $this->isEnable = $isEnable;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getSalt(): ?string
     {
         return null;
     }
 
     /**
-     * @param string $salt
+     * @param string|null $salt
      * @return  $this
      */
-    public function setSalt(string $salt): User
+    public function setSalt($salt): User
     {
         $this->salt = $salt;
         return $this;
@@ -172,6 +222,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->confirmToken,
+            $this->isEnable,
             $this->roles,
         ));
     }
@@ -182,6 +234,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->confirmToken,
+            $this->isEnable,
             $this->roles,
             ) = unserialize($serialized);
     }
