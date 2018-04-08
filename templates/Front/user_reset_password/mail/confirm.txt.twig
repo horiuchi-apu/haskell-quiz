@@ -1,14 +1,14 @@
 {% extends 'mail.txt.twig' %}
 
-{% block subject %}Haskell Quiz へようこそ{% endblock %}
+{% block subject %}Haskell Quiz パスワードの再設定{% endblock %}
 {% block to %}{{ user.email }}{% endblock %}
 {% block body %}
 {{ user.username }} 様
 
-Haskell Quiz へのご登録ありがとうございます。
-以下のURLをクリックして本登録を完了してください。
+以下のURLよりパスワードの再設定を行ってください。
+URLの有効期限は2時間です。
 
-{{ url('user_register_confirm_email', {token: user.confirmToken}) }}
+{{ url('user_reset_password_reset', {token: user.confirmToken}) }}
 
 ※当メールに心当たりの無い場合は、誠に恐れ入りますが破棄して頂けますよう、よろしくお願い致します。
 

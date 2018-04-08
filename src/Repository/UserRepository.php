@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use Carbon\Carbon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
@@ -30,4 +31,23 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getResult();
     }
 
+    /**
+     * @param $token
+     * @return null|User
+     */
+    public function findByToken($token)
+    {
+        $now = Carbon::now();
+
+        $users = $this->createQueryBuilder('u')
+            ->where('u.confirmToken = :token')
+            ->andWhere('u.confirmTokenLimit > :now')
+            ->setParameter('token', $token)
+            ->setParameter('now', $now)
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getResult();
+
+        return empty($users)? null: $users[0];
+    }
 }

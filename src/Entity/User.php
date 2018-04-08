@@ -53,6 +53,12 @@ class User implements AdvancedUserInterface
     private $confirmToken;
 
     /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $confirmTokenLimit;
+
+    /**
      * @var bool
      * @ORM\Column(type="boolean", nullable=false)
      */
@@ -163,6 +169,24 @@ class User implements AdvancedUserInterface
     }
 
     /**
+     * @return \DateTime|null
+     */
+    public function getConfirmTokenLimit(): ?\DateTime
+    {
+        return $this->confirmTokenLimit;
+    }
+
+    /**
+     * @param \DateTime|null $confirmTokenLimit
+     * @return $this
+     */
+    public function setConfirmTokenLimit(?\DateTime $confirmTokenLimit): User
+    {
+        $this->confirmTokenLimit = $confirmTokenLimit;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isEnabled(): bool
@@ -238,6 +262,7 @@ class User implements AdvancedUserInterface
             $this->username,
             $this->password,
             $this->confirmToken,
+            $this->confirmTokenLimit,
             $this->isEnabled,
             $this->roles,
         ));
@@ -250,6 +275,7 @@ class User implements AdvancedUserInterface
             $this->username,
             $this->password,
             $this->confirmToken,
+            $this->confirmTokenLimit,
             $this->isEnabled,
             $this->roles,
             ) = unserialize($serialized);
