@@ -1,0 +1,67 @@
+{% extends 'Front/quiz/layout.html.twig' %}
+
+{% block title %}
+    一問一答/{{ section.name }}
+{% endblock %}
+
+{% block page_header %}
+    一問一答 <small class="text-muted">{{ section.name }}</small>
+{% endblock %}
+
+{% block main %}
+    {% for quiz in section.quizzes %}
+        <div class="card mb-3">
+            <div class="card-header">
+                問題 {{ loop.index }}
+            </div>
+            <div class="card-body">
+                <div class="alert-area-{{ quiz.id }}"></div>
+                <p>
+                    {{ quiz.quizText }}
+                </p>
+
+                {% set form = formObject.createView %}
+                {{ form_start(form, {action: path('quiz_grading', {id: quiz.id})}) }}
+                {{ form_rest(form) }}
+                <button class="btn btn-primary submit-button">送信</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('.submit-button').click(function (e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            var params = form.serialize();
+            var input = form.find('input[type=text]');
+
+            if (!input.val()) {
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: params
+            }).done(function(data) {
+                var area = $('.alert-area-' + data.quizId);
+                area.empty();
+
+                if (data.isRight) {
+                    area.prepend('<div class="alert alert-success">' + data.message + '</div>');
+                } else {
+                    area.prepend('<div class="alert alert-danger">' + data.message + '</div>');
+                }
+            }).fail(function(data) {
+                var area = $('.alert-area-' + data.quizId);
+                area.empty();
+                area.prepend('<div class="alert alert-danger">' + data.message + '</div>');
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -15,14 +15,14 @@
             </div>
         {% endfor %}
     {% endfor %}
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
                     <div class="text-center">
                         {{ form_start(form) }}
                         {{ form_rest(form) }}
-                        <a class="btn btn-default" href="{{ path('front_index') }}">戻る</a>
+                        <a class="btn btn-secondary" href="{{ path('front_index') }}">戻る</a>
                         <button type="submit" class="btn btn-primary">送信</button>
                         {{ form_end(form) }}
                     </div>

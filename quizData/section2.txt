@@ -1,0 +1,41 @@
+2	Text p.25.	factorial 50	30414093201713378043612608166064768844377641568960512000000000000
+2	Text p.25.	circumference 4.0	25.132742
+2	Text p.26.	circumference' 4.0	25.132741228718345
+2	Text p.28.	5 == 5	True
+2	Text p.28.	5 /= 5	False
+2	Text p.28.	'a' == 'a'	True
+2	Text p.28.	"Ho Ho" == "Ho Ho"	True
+2	Text p.28.	3.432 == 3.432	True
+2	Text p.29.	"Abrakadabra" < "Zebra"	True
+2	Text p.29.	"Abrakadabra" `compare` "Zebra"	(LT)
+2	Text p.29.	5 >= 2	True
+2	Text p.29.	5 `compare` 3	GT
+2	Text p.29.	'b' > 'a'	True
+2	Text p.29.	show 3	"3"
+2	Text p.29.	show 5.334	"5.334"
+2	Text p.29.	show True	"True"
+2	Text p.30.	read "True" || False	True
+2	Text p.30.	read "8.2" + 3.8	12.0
+2	Text p.30.	read "5" - 2	3
+2	Text p.30.	read "[1,2,3,4]" ++ [3]	[1,2,3,4,3]
+2	Text p.31.	read "5" :: Int	5
+2	Text p.31.	read "5" :: Float	5.0
+2	Text p.31.	(read "5" :: Float) * 4	20.0
+2	Text p.31.	read "[1,2,3,4]" :: [Int]	[1,2,3,4]
+2	Text p.31.	read "(3, 'a')" :: (Int, Char)	(3, 'a')
+2	Text p.31.	[read "True", False, True , False]	[True, False, True , False]
+2	Text p.31.	['a'..'e']	"abcde"
+2	Text p.31.	[LT .. GT]	[LT,EQ,GT]
+2	Text p.31.	[3 .. 5]	[3,4,5]
+2	Text p.31.	succ 'B'	'C'
+2	Text p.32.	minBound :: Int	-2147483648
+2	Text p.32.	maxBound :: Char	'\1114111'
+2	Text p.32.	maxBound :: Bool	True
+2	Text p.32.	minBound :: Bool	False
+2	Text p.32.	maxBound :: (Bool, Int, Char)	(True,2147483647,'\1114111')
+2	Text p.32.	20 :: Int	20
+2	Text p.32.	20 :: Integer	20
+2	Text p.32.	20 :: Float	20.0
+2	Text p.32.	20 :: Double	20.0
+2	Text p.32.	fromIntegral (length [1,2,3,4]) + 3.2	7.2
+2	Text p.30.	read "4"	error "ambiguous type variable"

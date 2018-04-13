@@ -1,0 +1,63 @@
+5	Text p.62.	max 4 5	5
+5	Text p.62.	(max 4) 5	5
+5	Text p.63.	multTwoWithNine 2 3	54
+5	Text p.63.	compareWithHundred 99	GT
+5	Text p.64.	divideByTen 200	20.0
+5	Text p.64.	200 / 10	20.0
+5	Text p.64.	(/10) 200	20.0
+5	Text p.66.	applyTwice (+3) 10	16
+5	Text p.66.	applyTwice (++ " HAHA") "HEY"	"HEY HAHA HAHA"
+5	Text p.66.	applyTwice ("HAHA " ++) "HEY"	"HAHA HAHA HEY"
+5	Text p.66.	applyTwice (multThree 2 2) 9	144
+5	Text p.66.	applyTwice (3:) [1]	[3,3,1]
+5	Text p.67.	zipWith' (+) [4,2,5,6] [2,6,2,3]	[6,8,7,9]
+5	Text p.67.	zipWith' max [6,3,2,1] [7,3,1,5]	[7,3,2,5]
+5	Text p.67.	zipWith' (++) ["foo ", "bar ", "baz "] ["fighters", "hoppers", "aldrin"]	["foo fighters","bar hoppers","baz aldrin"]
+5	Text p.67.	zipWith' (*) (replicate 5 2) [1..]	[2,4,6,8,10]
+5	Text p.67.	zipWith' (zipWith' (*)) [[1,2,3],[3,5,6],[2,3,4]] [[3,2,2],[3,4,5],[5,4,3]]	[[3,4,6],[9,20,30],[10,12,12]]
+5	Text p.68.	zip [1,2,3,4,5] "hello"	[(1,'h'),(2,'e'),(3,'l'),(4,'l'),(5,'o')]
+5	Text p.68.	flip' zip [1,2,3,4,5] "hello"	[('h',1),('e',2),('l',3),('l',4),('o',5)]
+5	Text p.68.	zipWith div [2,2..] [10,8,6,4,2]	[0,0,0,0,1]
+5	Text p.68.	zipWith (flip' div) [2,2..] [10,8,6,4,2]	[5,4,3,2,1]
+5	Text p.68.	map (+3) [1,5,3,1,6]	[4,8,6,4,9]
+5	Text p.68.	map (++ "!") ["BIFF", "BANG", "POW"]	["BIFF!","BANG!","POW!"]
+5	Text p.68.	map (replicate 3) [3..6]	[[3,3,3],[4,4,4],[5,5,5],[6,6,6]]
+5	Text p.68.	map (map (^2)) [[1,2],[3,4,5,6],[7,8]]	[[1,4],[9,16,25,36],[49,64]]
+5	Text p.69.	map fst [(1,2),(3,5),(6,3),(2,6),(2,5)]	[1,3,6,2,2]
+5	Text p.69.	filter (>3) [1,5,3,2,1,6,4,3,2,1]	[5,6,4]
+5	Text p.69.	filter (==3) [1,2,3,4,5]	[3]
+5	Text p.69.	filter even [1..10]	[2,4,6,8,10]
+5	Text p.69.	let notNull x = not (null x) in filter notNull [[1,2,3],[],[3,4,5],[2,2],[],[],[]]	[[1,2,3],[3,4,5],[2,2]]
+5	Text p.69.	filter (`elem` ['a'..'z']) "u LaUgH aT mE BeCaUsE I aM diFfeRent"	"uagameasadifeent"
+5	Text p.69.	filter (`elem` ['A'..'Z']) "i lauGh At You BecAuse u r aLL the Same"	"GAYBALLS"
+5	Text p.70.	filter (<15) (filter even [1..20])	[2,4,6,8,10,12,14]
+5	Text p.70.	[x | x <- [1..20], x < 15, even x]	[2,4,6,8,10,12,14]
+5	Text p.71.	takeWhile (/=' ') "elephants know how to party"	"elephants"
+5	Text p.71.	sum (takeWhile (<10000) (filter odd (map (^2) [1..])))	166650
+5	Text p.71.	sum (takeWhile (<10000) [n^2 | n <- [1..], odd (n^2)])	166650
+5	Text p.72.	chain 10	[10,5,16,8,4,2,1]
+5	Text p.72.	chain 1	[1]
+5	Text p.72.	chain 30	[30,15,46,23,70,35,106,53,160,80,40,20,10,5,16,8,4,2,1]
+5	Text p.73.	(listOfFuns !! 4) 5	20
+5	Text p.73.	map (+3) [1,6,3,2]	[4,9,6,5]
+5	Text p.73.	map (\x -> x + 3) [1,6,3,2]	[4,9,6,5]
+5	Text p.74.	zipWith (\a b -> (a * 30 + 3) / b) [5,4,3,2,1] [1,2,3,4,5]	[153.0,61.5,31.0,15.75,6.6]
+5	Text p.74.	map (\(a,b) -> a + b) [(1,2),(3,5),(6,3),(2,6),(2,5)]	[3,8,9,8,7]
+5	Text p.75.	zipWith (flip (++)) ["love you", "love me"] ["i ", "you "]	["i love you","you love me"]
+5	Text p.75.	map (flip subtract 20) [1,2,3,4]	[19,18,17,16]
+5	Text p.76.	sum' [3,5,2,1]	11
+5	Text p.82.	and' (repeat False)	False
+5	Text p.82.	scanl (+) 0 [3,5,2,1]	[0,3,8,10,11]
+5	Text p.82.	scanr (+) 0 [3,5,2,1]	[11,8,3,1,0]
+5	Text p.82.	scanl1 (\acc x -> if x > acc then x else acc) [3,4,5,3,7,9,2,1]	[3,4,5,5,7,9,9,9]
+5	Text p.82.	scanl (flip (:)) [] [3,2,1	[[],[3],[2,3],[1,2,3]]
+5	Text p.83.	sqrtSums	131
+5	Text p.83.	sum (map sqrt [1..131])	1005.0942035344083
+5	Text p.83.	sum (map sqrt [1..130])	993.6486803921487
+5	Text p.83.	sum (filter (> 10) (map (*2) [2..10]))	80
+5	Text p.84.	sum $ filter (> 10) (map (*2) [2..10])	80
+5	Text p.84.	map ($ 3) [(4+), (10*), (^2), (sqrt)]	[7.0,30.0,9.0,1.7320508075688772]
+5	Text p.85.	map (\x -> negate (abs x)) [5,-3,-6,7,-3,2,-19,24]	[-5,-3,-6,-7,-3,-2,-19,-24]
+5	Text p.85.	map (negate . abs) [5,-3,-6,7,-3,2,-19,24]	[-5,-3,-6,-7,-3,-2,-19,-24]
+5	Text p.85.	map (\xs -> negate (sum (tail xs))) [[1..5],[3..6],[1..7]]	[-14,-15,-27]
+5	Text p.85.	map (negate . sum . tail) [[1..5],[3..6],[1..7]]	[-14,-15,-27]

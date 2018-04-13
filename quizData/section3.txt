@@ -1,0 +1,15 @@
+3	Text p.25.	charName 'a'	"Albert"
+3	Text p.25.	charName 'b'	"Broseph"
+3	Text p.25.	[a+b | (a,b) <- xs]	[4,7,6,8,11,4]
+3	Text p.25.	head' [4,5,6]	4
+3	Text p.25.	head' "Hello"	'H'
+3	Text p.25.	capital "Dracula"	"The first letter of Dracula is D"
+3	Text p.25.	bmiTell' 85 1.90	"You're supposedly normal. Pffft, I bet you're ugly!"
+3	Text p.25.	3 `myCompare` 2	GT
+3	Text p.25.	[if 5 > 3 then "Woo" else "Boo", if 'a' > 'b' then "Foo" else "Bar"]	["Woo", "Bar"]
+3	Text p.25.	4 * (if 10 > 5 then 10 else 0) + 2	42
+3	Text p.25.	[let square x = x * x in (square 5, square 3, square 2)] 	[(25,9,4)]
+3	Text p.25.	(let a = 100; b = 200; c = 300 in a*b*c, let foo="Hey "; bar = "there!" in foo ++ bar) 	(6000000,"Hey there!")
+3	Text p.25.	(let (a,b,c) = (1,2,3) in a+b+c) * 100 	600
+3	Text p.25.	let zoot x y z = x * y + z in zoot 3 9 2 	29
+3	Text p.25.	let boot x y z = x * y + z in boot 3 4 2 	14

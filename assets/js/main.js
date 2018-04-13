@@ -1,2 +1,3 @@
-var $ = require('jquery');
-require('bootstrap-sass');
+const $ = require('jquery');
+global.$ = global.jQuery = $;
+require('bootstrap');

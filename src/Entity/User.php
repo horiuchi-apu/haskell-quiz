@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -59,6 +60,12 @@ class User implements AdvancedUserInterface
     private $confirmTokenLimit;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="user")
+     */
+    private $answers;
+
+    /**
      * @var bool
      * @ORM\Column(type="boolean", nullable=false)
      */
@@ -89,6 +96,7 @@ class User implements AdvancedUserInterface
     {
         $this->setRoles(['ROLE_USER']);
         $this->setIsEnabled(false);
+        $this->answers = new ArrayCollection();
     }
 
     public function getId()
@@ -183,6 +191,24 @@ class User implements AdvancedUserInterface
     public function setConfirmTokenLimit(?\DateTime $confirmTokenLimit): User
     {
         $this->confirmTokenLimit = $confirmTokenLimit;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAnswers(): ArrayCollection
+    {
+        return $this->answers;
+    }
+
+    /**
+     * @param ArrayCollection $answers
+     * @return $this
+     */
+    public function setAnswers(ArrayCollection $answers): User
+    {
+        $this->answers = $answers;
         return $this;
     }
 
