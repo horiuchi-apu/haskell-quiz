@@ -74,6 +74,9 @@ class MenuBuilder
             ],
             'linkAttributes' => [
                 'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'fa-users'
             ]
         ]);
 
@@ -84,6 +87,9 @@ class MenuBuilder
             ],
             'linkAttributes' => [
                 'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'fa-puzzle-piece'
             ]
         ]);
 
@@ -94,6 +100,9 @@ class MenuBuilder
             ],
             'linkAttributes' => [
                 'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'fa-question-circle'
             ]
         ]);
 
@@ -104,6 +113,9 @@ class MenuBuilder
             ],
             'linkAttributes' => [
                 'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'fa-exclamation-circle'
             ]
         ]);
 
