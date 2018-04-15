@@ -13,6 +13,9 @@ Encore
     // uncomment to define the assets of the project
     .addEntry('js/main', './assets/js/main.js')
     .addStyleEntry('css/global', './assets/css/global.scss')
+    //admin
+    .addEntry('js/admin', './assets/js/admin.js')
+    .addStyleEntry('css/admin', './assets/css/admin.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()

@@ -7,7 +7,7 @@
             <link rel="stylesheet" href="{{ asset('build/css/global.css') }}">
         {% endblock %}
     </head>
-    <body class="pt-5">
+    <body class="pt-5 {% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}">
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/main.js') }}"></script>

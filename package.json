@@ -16,6 +16,7 @@
         "build": "encore production"
     },
     "dependencies": {
-        "popper.js": "^1.14.3"
+        "popper.js": "^1.14.3",
+        "startbootstrap-sb-admin": "^4.0.0"
     }
 }
