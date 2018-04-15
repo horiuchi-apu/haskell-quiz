@@ -1,3 +1,12 @@
 @import "~startbootstrap-sb-admin/scss/sb-admin";
 @import "~startbootstrap-sb-admin/vendor/font-awesome/scss/font-awesome";
 @import "~startbootstrap-sb-admin/vendor/datatables/dataTables.bootstrap4.css";
+
+ul.navbar-nav {
+  li.current {
+    background: #272c30;
+    a {
+      color: #adb5bd !important;
+    }
+  }
+}

@@ -67,8 +67,8 @@ class MenuBuilder
             ],
         ]);
 
-        $menu->addChild('menu1', [
-            'route' => 'admin_index',
+        $menu->addChild('ユーザー一覧', [
+            'route' => 'admin_user_index',
             'attributes' => [
                 'class' => 'nav-item',
             ],
@@ -77,9 +77,28 @@ class MenuBuilder
             ]
         ]);
 
+        $menu->addChild('セクション一覧', [
+            'route' => 'admin_section_index',
+            'attributes' => [
+                'class' => 'nav-item',
+            ],
+            'linkAttributes' => [
+                'class' => 'nav-link'
+            ]
+        ]);
 
-        $menu->addChild('menu2', [
-            'route' => 'admin_index',
+        $menu->addChild('問題一覧', [
+            'route' => 'admin_quiz_index',
+            'attributes' => [
+                'class' => 'nav-item',
+            ],
+            'linkAttributes' => [
+                'class' => 'nav-link'
+            ]
+        ]);
+
+        $menu->addChild('解答一覧', [
+            'route' => 'admin_answer_index',
             'attributes' => [
                 'class' => 'nav-item',
             ],

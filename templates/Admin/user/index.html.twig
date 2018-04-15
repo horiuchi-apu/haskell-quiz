@@ -1,0 +1,41 @@
+{% extends 'Admin/layout.html.twig' %}
+
+{% block title %}Haskell Quiz 管理画面/ユーザー一覧{% endblock %}
+
+{% block main %}
+    <div class="card mb-3">
+        <div class="card-header">
+            ユーザー一覧
+        </div>
+        <div class="table-responsive">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>メールアドレス</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in pagination %}
+                                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

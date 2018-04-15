@@ -1,0 +1,43 @@
+{% extends 'Admin/layout.html.twig' %}
+
+{% block title %}Haskell Quiz 管理画面/セクション一覧{% endblock %}
+
+{% block main %}
+    <div class="card mb-3">
+        <div class="card-header">
+            セクション一覧
+        </div>
+        <div class="table-responsive">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>セクション名</th>
+                                <th>URL</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for section in pagination %}
+                                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                                    <td>{{ section.id }}</td>
+                                    <td>{{ section.name }}</td>
+                                    <td>{{ section.slug }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
