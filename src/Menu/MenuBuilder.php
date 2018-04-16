@@ -63,7 +63,7 @@ class MenuBuilder
     {
         $menu = $this->factory->createItem('root', [
             'childrenAttributes' => [
-                'class' => 'navbar-nav navbar-sidenav',
+                'class' => 'nav',
             ],
         ]);
 
@@ -76,7 +76,7 @@ class MenuBuilder
                 'class' => 'nav-link'
             ],
             'extras' => [
-                'icon' => 'fa-users'
+                'icon' => 'people'
             ]
         ]);
 
@@ -89,7 +89,7 @@ class MenuBuilder
                 'class' => 'nav-link'
             ],
             'extras' => [
-                'icon' => 'fa-puzzle-piece'
+                'icon' => 'library_books'
             ]
         ]);
 
@@ -102,7 +102,7 @@ class MenuBuilder
                 'class' => 'nav-link'
             ],
             'extras' => [
-                'icon' => 'fa-question-circle'
+                'icon' => 'check'
             ]
         ]);
 
@@ -115,7 +115,7 @@ class MenuBuilder
                 'class' => 'nav-link'
             ],
             'extras' => [
-                'icon' => 'fa-exclamation-circle'
+                'icon' => 'question_answer'
             ]
         ]);
 

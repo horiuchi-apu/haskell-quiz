@@ -34,7 +34,7 @@ security:
                 use_referer: false
             logout:
                path: admin_logout
-               target: /
+               target: /admin
                invalidate_session: true
             anonymous: true
         main:
