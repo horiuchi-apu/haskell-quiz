@@ -95,6 +95,9 @@
     "nesbot/carbon": {
         "version": "1.25.0"
     },
+    "nikic/php-parser": {
+        "version": "v4.0.1"
+    },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
