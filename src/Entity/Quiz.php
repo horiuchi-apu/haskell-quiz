@@ -71,7 +71,7 @@ class Quiz
     /**
      * @return string
      */
-    public function getQuizText(): string
+    public function getQuizText(): ?string
     {
         return $this->quizText;
     }
@@ -80,7 +80,7 @@ class Quiz
      * @param string $quizText
      * @return $this
      */
-    public function setQuizText(string $quizText): Quiz
+    public function setQuizText(string $quizText): ?Quiz
     {
         $this->quizText = $quizText;
         return $this;
@@ -89,7 +89,7 @@ class Quiz
     /**
      * @return string
      */
-    public function getAnswerText(): string
+    public function getAnswerText(): ?string
     {
         return $this->answerText;
     }
@@ -98,7 +98,7 @@ class Quiz
      * @param string $answerText
      * @return $this
      */
-    public function setAnswerText(string $answerText): Quiz
+    public function setAnswerText(string $answerText): ?Quiz
     {
         $this->answerText = $answerText;
         return $this;
@@ -107,7 +107,7 @@ class Quiz
     /**
      * @return Section
      */
-    public function getSection(): Section
+    public function getSection(): ?Section
     {
         return $this->section;
     }
@@ -116,7 +116,7 @@ class Quiz
      * @param Section $section
      * @return $this
      */
-    public function setSection(Section $section): Quiz
+    public function setSection(Section $section): ?Quiz
     {
         $this->section = $section;
         return $this;
@@ -125,7 +125,7 @@ class Quiz
     /**
      * @return ArrayCollection
      */
-    public function getAnswers(): ArrayCollection
+    public function getAnswers()
     {
         return $this->answers;
     }
@@ -134,7 +134,7 @@ class Quiz
      * @param ArrayCollection $answers
      * @return $this
      */
-    public function setAnswers(ArrayCollection $answers): Quiz
+    public function setAnswers(ArrayCollection $answers): ?Quiz
     {
         $this->answers = $answers;
         return $this;
@@ -143,7 +143,7 @@ class Quiz
     /**
      * @return string
      */
-    public function getPage(): string
+    public function getPage(): ?string
     {
         return $this->page;
     }
@@ -152,7 +152,7 @@ class Quiz
      * @param string $page
      * @return $this
      */
-    public function setPage(string $page): Quiz
+    public function setPage(string $page): ?Quiz
     {
         $this->page = $page;
         return $this;

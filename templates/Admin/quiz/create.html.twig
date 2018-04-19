@@ -1,0 +1,20 @@
+{% extends 'Admin/layout.html.twig' %}
+
+{% block title %}Haskell Quiz 管理画面/問題新規登録{% endblock %}
+
+{% block navbar_title %}問題新規登録{% endblock %}
+
+{% block main %}
+<div class="card mb-3">
+    <div class="card-header card-header-primary">
+        問題新規登録
+    </div>
+    <div class="card-body">
+        {{ form_start(form) }}
+        {{ form_rest(form) }}
+        <button type="submit" class="btn btn-primary btn-block">登録</button>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
+

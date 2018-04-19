@@ -58,7 +58,7 @@ class Section
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -67,7 +67,7 @@ class Section
      * @param string $name
      * @return $this
      */
-    public function setName(string $name): Section
+    public function setName(string $name): ?Section
     {
         $this->name = $name;
         return $this;
@@ -76,7 +76,7 @@ class Section
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -85,7 +85,7 @@ class Section
      * @param string $slug
      * @return $this
      */
-    public function setSlug(string $slug): Section
+    public function setSlug(string $slug): ?Section
     {
         $this->slug = $slug;
         return $this;
@@ -103,13 +103,13 @@ class Section
      * @param ArrayCollection $quizzes
      * @return $this
      */
-    public function setQuizzes(ArrayCollection $quizzes): Section
+    public function setQuizzes(ArrayCollection $quizzes): ?Section
     {
         $this->quizzes = $quizzes;
         return $this;
     }
 
-    public function addQuiz(Quiz $quiz): Section
+    public function addQuiz(Quiz $quiz): ?Section
     {
         $this->quizzes->add($quiz);
         $quiz->setSection($this);

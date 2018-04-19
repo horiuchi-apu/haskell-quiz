@@ -17,6 +17,7 @@
                         <th>セクション</th>
                         <th>問題文</th>
                         <th>答</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,6 +27,10 @@
                             <td>{{ quiz.section }}</td>
                             <td>{{ quiz.quizText }}</td>
                             <td>{{ quiz.answerText }}</td>
+                            <td class="td-actions text-right">
+                                <a rel="tooltip" class="btn btn-success" href="{{ path('admin_quiz_edit', {id: quiz.id}) }}"><i class="material-icons">mode_edit</i></a>
+                                <a rel="tooltip" class="btn btn-danger admin-quiz-delete-button" href="{{ path('admin_quiz_delete', {id: quiz.id}) }}"><i class="material-icons">delete</i></a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -35,4 +40,39 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="quizDeleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="quizDeleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quizDeleteConfirmModalLabel">確認</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    削除してよろしいですか?
+                </div>
+                <div class="modal-footer">
+                    {{ form_start(deleteForm, {attr: {id: 'deleteForm'}}) }}
+                    {{ form_rest(deleteForm) }}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-primary" id="deleteConfirm">削除</button>
+                    {{ form_end(deleteForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('.admin-quiz-delete-button').click(function (e) {
+            e.preventDefault();
+            $('#quizDeleteConfirmModal').modal();
+            var $action = $(this).attr('href');
+            $('#deleteForm').attr('action', $action);
+        })
+    </script>
 {% endblock %}
