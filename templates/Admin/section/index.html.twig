@@ -1,0 +1,76 @@
+{% extends 'Admin/layout.html.twig' %}
+
+{% block title %}Haskell Quiz 管理画面/セクション一覧{% endblock %}
+{% block navbar_title %}セクション一覧{% endblock %}
+
+{% block main %}
+    <div class="card mb-3">
+        <div class="card-header card-header-primary">
+            セクション一覧
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>セクション名</th>
+                        <th>URL</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for section in pagination %}
+                        <tr {% if loop.index is odd %}class="color"{% endif %}>
+                            <td>{{ section.id }}</td>
+                            <td>{{ section.name }}</td>
+                            <td>{{ section.slug }}</td>
+                            <td class="td-actions text-right">
+                                <a rel="tooltip" class="btn btn-success" href="{{ path('admin_section_edit', {id: section.id}) }}"><i class="material-icons">mode_edit</i></a>
+                                <a rel="tooltip" class="btn btn-danger admin-section-delete-button" href="{{ path('admin_section_delete', {id: section.id}) }}"><i class="material-icons">delete</i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="sectionDeleteConfirmModal" tabindex="-1" role="dialog" aria-labelledby="sectionDeleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sectionDeleteConfirmModalLabel">確認</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    削除してよろしいですか?
+                </div>
+                <div class="modal-footer">
+                    {{ form_start(deleteForm, {attr: {id: 'deleteForm'}}) }}
+                    {{ form_rest(deleteForm) }}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-primary" id="deleteConfirm">削除</button>
+                    {{ form_end(deleteForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('.admin-section-delete-button').click(function (e) {
+            e.preventDefault();
+            $('#sectionDeleteConfirmModal').modal();
+            var $action = $(this).attr('href');
+            $('#deleteForm').attr('action', $action);
+        })
+    </script>
+{% endblock %}

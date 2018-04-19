@@ -32,3 +32,4 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: quizSectionMenu, alias: quiz_section }
+            - { name: knp_menu.menu_builder, method: adminSideMenu, alias: admin_side }

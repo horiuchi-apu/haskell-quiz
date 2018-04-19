@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{{ asset('vendor/material-dashboard/css/material-dashboard.min.css') }}">
+{% endblock %}
+
+{% block body_class %}{% endblock %}
+
+{% if form is defined %}
+    {% form_theme form 'Admin/form/theme.html.twig' %}
+{% endif %}
+
+{% block body %}
+    <div class="wrapper">
+
+        {% block side_bar %}
+            <div class="sidebar" data-background-color="white" data-color="purple">
+                <div class="logo text-center">
+                    Haskell Quiz
+                </div>
+                <div class="sidebar-wrapper">
+                    {{ knp_menu_render('admin_side', {currentClass: 'active', template: 'Admin/menu/AdminSideMenu.html.twig'}) }}
+                </div>
+            </div>
+        {% endblock %}
+
+
+        <div class="main-panel">
+            {% block top_nav %}
+                <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
+                    <div class="container-fluid">
+                        <div class="navbar-wrapper">
+                            <a class="navbar-brand" href="{{ path('admin_index') }}">
+                                {% block navbar_title %}{% endblock %}
+                            </a>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                            <span class="navbar-toggler-icon icon-bar"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                            <form class="navbar-form">
+                            <span class="bmd-form-group">
+                            <div class="input-group no-border">
+                            <input type="text" value="" class="form-control" placeholder="Search...">
+                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                            <i class="material-icons">search</i>
+                            </button>
+                            </div>
+                            </span>
+                            </form>
+
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('admin_logout') }}">
+                                        <i class="material-icons">exit_to_app</i>
+                                        <p>
+                                            <span class="d-lg-none d-md-block">Logout</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+
+            {% endblock %}
+            <div class="content">
+                <div class="container-fluid">
+                    {% for flashType,flashMessages in app.session.flashBag.all %}
+                        {% for flashMessage in flashMessages %}
+                            <div class="alert alert-{{ flashType }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% block main %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('vendor/material-dashboard/js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/plugins/arrive.min.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/plugins/chartist.min.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/plugins/demo.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/plugins/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/plugins/bootstrap-notify.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/bootstrap-material-design.min.js') }}"></script>
+    <script src="{{ asset('vendor/material-dashboard/js/material-dashboard.js') }}"></script>
+{% endblock %}

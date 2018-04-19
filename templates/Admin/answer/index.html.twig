@@ -1,0 +1,39 @@
+{% extends 'Admin/layout.html.twig' %}
+
+{% block title %}Haskell Quiz 管理画面/解答一覧{% endblock %}
+{% block navbar_title %}解答一覧{% endblock %}
+
+{% block main %}
+    <div class="card mb-3">
+        <div class="card-header card-header-primary">
+            解答一覧
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>正解</th>
+                        <th>問題文</th>
+                        <th>解答</th>
+                        <th>解答者</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for answer in pagination %}
+                        <tr {% if loop.index is odd %}class="color"{% endif %}>
+                            <td>{{ answer.id }}</td>
+                            <td>{{ answer.isRight? '○': '×' }}</td>
+                            <td>{{ answer.quiz.quizText }}</td>
+                            <td>{{ answer.answerText }}</td>
+                            <td>{{ answer.user.email }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

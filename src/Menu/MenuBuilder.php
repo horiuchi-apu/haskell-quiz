@@ -58,4 +58,121 @@ class MenuBuilder
         }
         return $menu;
     }
+
+    public function adminSideMenu(array $options)
+    {
+        $menu = $this->factory->createItem('root', [
+            'childrenAttributes' => [
+                'class' => 'nav',
+            ],
+        ]);
+
+        $menu->addChild('ユーザー一覧', [
+            'route' => 'admin_user_index',
+            'attributes' => [
+                'class' => 'nav-item',
+            ],
+            'linkAttributes' => [
+                'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'people'
+            ]
+        ]);
+
+        $menu->addChild('セクション一覧', [
+            'route' => 'admin_section_index',
+            'attributes' => [
+                'class' => 'nav-item',
+            ],
+            'linkAttributes' => [
+                'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'library_books'
+            ]
+        ]);
+
+        $menu->addChild('問題一覧', [
+            'route' => 'admin_quiz_index',
+            'attributes' => [
+                'class' => 'nav-item',
+            ],
+            'linkAttributes' => [
+                'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'check'
+            ]
+        ]);
+
+        $menu->addChild('解答一覧', [
+            'route' => 'admin_answer_index',
+            'attributes' => [
+                'class' => 'nav-item',
+            ],
+            'linkAttributes' => [
+                'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'question_answer'
+            ]
+        ]);
+
+//        $menu->addChild('Level1', [
+//            'uri' => '#level2',
+//            'attributes' => [
+//                'class' => 'nav-item',
+//                'data-toggle' => 'tooltip',
+//                'data-placement' => 'right'
+//            ],
+//            'linkAttributes' => [
+//                'class' => 'nav-link nav-link-collapse collapsed',
+//                'data-toggle' => 'collapse',
+//            ],
+//            'childrenAttributes' => [
+//                'class' => 'sidenav-second-level collapse',
+//                'id' => 'level2'
+//            ]
+//        ]);
+//
+//        $menu['Level1']->addChild('Level2-1', [
+//            'route' => 'admin_index',
+//            'attributes' => [
+//                'class' => 'nav-item',
+//            ],
+//            'linkAttributes' => [
+//                'class' => 'nav-link',
+//            ],
+//        ]);
+//
+//        $menu['Level1']->addChild('Level2-2', [
+//            'uri' => '#level3',
+//            'attributes' => [
+//                'class' => 'nav-item',
+//                'data-toggle' => 'tooltip',
+//                'data-placement' => 'right'
+//            ],
+//            'linkAttributes' => [
+//                'class' => 'nav-link nav-link-collapse collapsed',
+//                'data-toggle' => 'collapse',
+//            ],
+//            'childrenAttributes' => [
+//                'class' => 'sidenav-third-level collapse',
+//                'id' => 'level3'
+//            ]
+//        ]);
+//
+//        $menu['Level1']['Level2-2']->addChild('Level3', [
+//            'route' => 'admin_index',
+//            'attributes' => [
+//                'class' => 'nav-item',
+//            ],
+//            'linkAttributes' => [
+//                'class' => 'nav-link'
+//            ],
+//        ]);
+
+        return $menu;
+    }
 }

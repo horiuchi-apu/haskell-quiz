@@ -2,12 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Haskell Quiz{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/global.css') }}">
         {% endblock %}
     </head>
-    <body class="pt-5">
+    <body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}">
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/main.js') }}"></script>
