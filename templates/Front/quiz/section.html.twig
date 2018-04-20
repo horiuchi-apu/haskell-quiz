@@ -8,11 +8,22 @@
     一問一答 <small class="text-muted">{{ section.name }}</small>
 {% endblock %}
 
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="{{ path('front_index') }}">ホーム</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('quiz_index') }}">一問一答</a>
+    </li>
+    <li class="breadcrumb-item active">{{ section.name }}</li>
+</ol>
+{% endblock %}
+
 {% block content %}
-    {{ parent() }}
     {% for quiz in section.quizzes %}
         <div class="card mb-3">
-            <div class="card-header">
+            <div class="card-header cyan text-white">
                 問題 {{ loop.index }}: 次の問題をGHCIに入力した時の出力を答えよ．
             </div>
             <div class="card-body text-center">

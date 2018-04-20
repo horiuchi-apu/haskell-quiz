@@ -5,7 +5,7 @@
 {% block main %}
     <h1 class="front-Top_Header display-4">
         <img src="{{ asset('img/Haskell-Logo.png') }}">
-        <span class="front-Top_Header-text">Haskell Quiz</span>
+        <span class="front-Top_Header-text cyan-text">Haskell Quiz</span>
     </h1>
     <hr class="my-5">
 
@@ -18,7 +18,7 @@
                             <h2 class="h2-responsive card-header-title mt-3 mb-4">{{ section.name }}</h2>
                         </div>
                         <div class="card-body text-center">
-                            <p>{{ section.name }}の説明</p>
+                            <p>{{ section.description }}</p>
                         </div>
                         <div class="card-footer text-center">
                             <a class="btn btn-primary btn-rounded waves-effect waves-light" href="{{ path('quiz_section', {slug: section.slug}) }}">GO!</a>

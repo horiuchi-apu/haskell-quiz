@@ -36,6 +36,12 @@ class Section
     private $slug;
 
     /**
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Entity\Quiz", mappedBy="section")
      */
@@ -85,9 +91,27 @@ class Section
      * @param string $slug
      * @return $this
      */
-    public function setSlug(string $slug): ?Section
+    public function setSlug(string $slug): Section
     {
         $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription(string $description): Section
+    {
+        $this->description = $description;
         return $this;
     }
 
