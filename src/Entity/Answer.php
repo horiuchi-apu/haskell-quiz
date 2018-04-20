@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnswerRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Answer
 {
@@ -45,9 +47,22 @@ class Answer
      */
     private $isRight;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $modified;
 
     public function __construct()
     {
+        $this->setCreated(new \DateTime());
+        $this->setModified(new \DateTime());
     }
 
     /**
@@ -138,6 +153,42 @@ class Answer
         return $this->isRight? self::CORRECT_MESSAGE: self::INCORRECT_MESSAGE;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     * @return  $this
+     */
+    public function setCreated(\DateTime $created): Answer
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModified(): \DateTime
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param \DateTime $modified
+     * @return  $this
+     */
+    public function setModified(\DateTime $modified): Answer
+    {
+        $this->modified = $modified;
+        return $this;
+    }
+
     public function grading()
     {
         if ($this->quiz){
@@ -145,5 +196,13 @@ class Answer
         } else {
             $this->setIsRight(false);
         }
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateModifiedDatetime() {
+        $this->setModified(new \DateTime());
     }
 }
