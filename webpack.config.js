@@ -16,6 +16,9 @@ Encore
     //admin
     .addEntry('js/admin', './assets/js/admin.js')
     .addStyleEntry('css/admin', './assets/css/admin.scss')
+    //front
+    .addEntry('js/front', './assets/js/front.js')
+    .addStyleEntry('css/front', './assets/css/front.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()

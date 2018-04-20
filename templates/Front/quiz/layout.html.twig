@@ -1,5 +1,7 @@
 {% extends 'Front/layout.html.twig' %}
 
 {% block side %}
-    {{ knp_menu_render('quiz_section', {currentClass: 'active', template: 'Front/menu/SectionSideMenu.html.twig'}) }}
+    <div class="mb-4">
+        {{ knp_menu_render('quiz_section', {currentClass: 'active', template: 'Front/menu/SectionSideMenu.html.twig'}) }}
+    </div>
 {% endblock %}

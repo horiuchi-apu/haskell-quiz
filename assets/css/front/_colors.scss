@@ -1,0 +1,181 @@
+@import "~mdbootstrap/scss/core/colors";
+
+.mdb-color-gradient {
+  background: -webkit-linear-gradient(50deg,$mdb-color-lighten-1,$mdb-color-darken-3)!important;
+  background: -o-linear-gradient(50deg,$mdb-color-lighten-1,$mdb-color-darken-3)!important;
+  background: linear-gradient(40deg,$mdb-color-lighten-1,$mdb-color-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.red-gradient {
+  background: -webkit-linear-gradient(50deg,$red-accent-1,$red-darken-3)!important;
+  background: -o-linear-gradient(50deg,$red-accent-1,$red-darken-3)!important;
+  background: linear-gradient(40deg,$red-accent-1,$red-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.pink-gradient {
+  background: -webkit-linear-gradient(50deg,$pink-accent-1,$pink-darken-3)!important;
+  background: -o-linear-gradient(50deg,$pink-accent-1,$pink-darken-3)!important;
+  background: linear-gradient(40deg,$pink-accent-1,$pink-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.purple-gradient {
+  background: -webkit-linear-gradient(50deg,$purple-accent-1,$purple-darken-3)!important;
+  background: -o-linear-gradient(50deg,$purple-accent-1,$purple-darken-3)!important;
+  background: linear-gradient(40deg,$purple-accent-1,$purple-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.deep-purple-gradient {
+  background: -webkit-linear-gradient(50deg,$deep-purple-accent-1,$deep-purple-darken-3)!important;
+  background: -o-linear-gradient(50deg,$deep-purple-accent-1,$deep-purple-darken-3)!important;
+  background: linear-gradient(40deg,$deep-purple-accent-1,$deep-purple-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.indigo-gradient {
+  background: -webkit-linear-gradient(50deg,$indigo-accent-1,$indigo-darken-3)!important;
+  background: -o-linear-gradient(50deg,$indigo-accent-1,$indigo-darken-3)!important;
+  background: linear-gradient(40deg,$indigo-accent-1,$indigo-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.blue-gradient {
+  background: -webkit-linear-gradient(50deg,$blue-accent-1,$blue-darken-3)!important;
+  background: -o-linear-gradient(50deg,$blue-accent-1,$blue-darken-3)!important;
+  background: linear-gradient(40deg,$blue-accent-1,$blue-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.light-blue-gradient {
+  background: -webkit-linear-gradient(50deg,$light-blue-accent-1,$light-blue-darken-3)!important;
+  background: -o-linear-gradient(50deg,$light-blue-accent-1,$light-blue-darken-3)!important;
+  background: linear-gradient(40deg,$light-blue-accent-1,$light-blue-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.cyan-gradient {
+  background: -webkit-linear-gradient(50deg,$cyan-accent-1,$cyan-darken-3)!important;
+  background: -o-linear-gradient(50deg,$cyan-accent-1,$cyan-darken-3)!important;
+  background: linear-gradient(40deg,$cyan-accent-1,$cyan-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.teal-gradient {
+  background: -webkit-linear-gradient(50deg,$teal-accent-1,$teal-darken-3)!important;
+  background: -o-linear-gradient(50deg,$teal-accent-1,$teal-darken-3)!important;
+  background: linear-gradient(40deg,$teal-accent-1,$teal-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.green-gradient {
+  background: -webkit-linear-gradient(50deg,$green-accent-1,$green-darken-3)!important;
+  background: -o-linear-gradient(50deg,$green-accent-1,$green-darken-3)!important;
+  background: linear-gradient(40deg,$green-accent-1,$green-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.light-green-gradient {
+  background: -webkit-linear-gradient(50deg,$light-green-accent-1,$light-green-darken-3)!important;
+  background: -o-linear-gradient(50deg,$light-green-accent-1,$light-green-darken-3)!important;
+  background: linear-gradient(40deg,$light-green-accent-1,$light-green-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.lime-gradient {
+  background: -webkit-linear-gradient(50deg,$lime-accent-1,$lime-darken-3)!important;
+  background: -o-linear-gradient(50deg,$lime-accent-1,$lime-darken-3)!important;
+  background: linear-gradient(40deg,$lime-accent-1,$lime-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.yellow-gradient {
+  background: -webkit-linear-gradient(50deg,$yellow-accent-1,$yellow-darken-3)!important;
+  background: -o-linear-gradient(50deg,$yellow-accent-1,$yellow-darken-3)!important;
+  background: linear-gradient(40deg,$yellow-accent-1,$yellow-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.amber-gradient {
+  background: -webkit-linear-gradient(50deg,$amber-accent-1,$amber-darken-3)!important;
+  background: -o-linear-gradient(50deg,$amber-accent-1,$amber-darken-3)!important;
+  background: linear-gradient(40deg,$amber-accent-1,$amber-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.orange-gradient {
+  background: -webkit-linear-gradient(50deg,$orange-accent-1,$orange-darken-3)!important;
+  background: -o-linear-gradient(50deg,$orange-accent-1,$orange-darken-3)!important;
+  background: linear-gradient(40deg,$orange-accent-1,$orange-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.deep-orange-gradient {
+  background: -webkit-linear-gradient(50deg,$deep-orange-accent-1,$deep-orange-darken-3)!important;
+  background: -o-linear-gradient(50deg,$deep-orange-accent-1,$deep-orange-darken-3)!important;
+  background: linear-gradient(40deg,$deep-orange-accent-1,$deep-orange-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.brown-gradient {
+  background: -webkit-linear-gradient(50deg,$brown-lighten-1,$brown-darken-3)!important;
+  background: -o-linear-gradient(50deg,$brown-lighten-1,$brown-darken-3)!important;
+  background: linear-gradient(40deg,$brown-lighten-1,$brown-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.blue-grey-gradient {
+  background: -webkit-linear-gradient(50deg,$blue-grey-lighten-1,$blue-grey-darken-3)!important;
+  background: -o-linear-gradient(50deg,$blue-grey-lighten-1,$blue-grey-darken-3)!important;
+  background: linear-gradient(40deg,$blue-grey-lighten-1,$blue-grey-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}
+
+.grey-gradient {
+  background: -webkit-linear-gradient(50deg,$grey-lighten-1,$grey-darken-3)!important;
+  background: -o-linear-gradient(50deg,$grey-lighten-1,$grey-darken-3)!important;
+  background: linear-gradient(40deg,$grey-lighten-1,$grey-darken-3)!important;
+  .card-header-title {
+    color: #fff;
+  }
+}

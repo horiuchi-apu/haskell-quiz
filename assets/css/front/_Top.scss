@@ -1,0 +1,17 @@
+.front-Top_Header {
+  display: flex;
+  max-height: 200px;
+  justify-content: center;
+  align-items: center;
+  img {
+    height: 200px;
+    @media screen and (max-width: 414px) {
+      height: auto;
+      width: 40%;
+    }
+  }
+  span {
+    padding-left: 30px;
+    display: inline-block;
+  }
+}
