@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  *     errorPath="username",
  *     message="既に登録されています"
  * )
+ * @ORM\HasLifecycleCallbacks
  */
 class User implements AdvancedUserInterface
 {
@@ -92,11 +93,25 @@ class User implements AdvancedUserInterface
      */
     private $roles;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $modified;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_USER']);
         $this->setIsEnabled(false);
         $this->answers = new ArrayCollection();
+        $this->setCreated(new \DateTime());
+        $this->setModified(new \DateTime());
     }
 
     public function getId()
@@ -281,6 +296,42 @@ class User implements AdvancedUserInterface
         return $this->getUsername() . "@cis.aichi-pu.ac.jp";
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     * @return  $this
+     */
+    public function setCreated(\DateTime $created): User
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModified(): \DateTime
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param \DateTime $modified
+     * @return  $this
+     */
+    public function setModified(\DateTime $modified): User
+    {
+        $this->modified = $modified;
+        return $this;
+    }
+
     public function serialize()
     {
         return serialize(array(
@@ -305,5 +356,13 @@ class User implements AdvancedUserInterface
             $this->isEnabled,
             $this->roles,
             ) = unserialize($serialized);
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateModifiedDatetime() {
+        $this->setModified(new \DateTime());
     }
 }

@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SectionRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Section
 {
@@ -47,10 +48,24 @@ class Section
      */
     private $quizzes;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $modified;
+
 
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
+        $this->setCreated(new \DateTime());
+        $this->setModified(new \DateTime());
     }
 
     /**
@@ -140,8 +155,52 @@ class Section
         return $this;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     * @return  $this
+     */
+    public function setCreated(\DateTime $created): Section
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModified(): \DateTime
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param \DateTime $modified
+     * @return  $this
+     */
+    public function setModified(\DateTime $modified): Section
+    {
+        $this->modified = $modified;
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateModifiedDatetime() {
+        $this->setModified(new \DateTime());
     }
 }

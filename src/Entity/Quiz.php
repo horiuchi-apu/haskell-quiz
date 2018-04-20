@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuizRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Quiz
 {
@@ -54,10 +55,23 @@ class Quiz
      */
     private $page;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $modified;
 
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->setCreated(new \DateTime());
+        $this->setModified(new \DateTime());
     }
 
     /**
@@ -156,5 +170,49 @@ class Quiz
     {
         $this->page = $page;
         return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     * @return  $this
+     */
+    public function setCreated(\DateTime $created): Quiz
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModified(): \DateTime
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param \DateTime $modified
+     * @return  $this
+     */
+    public function setModified(\DateTime $modified): Quiz
+    {
+        $this->modified = $modified;
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateModifiedDatetime() {
+        $this->setModified(new \DateTime());
     }
 }

@@ -2,15 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdminUserRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class AdminUser implements UserInterface
 {
@@ -44,9 +41,23 @@ class AdminUser implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $modified;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_ADMIN']);
+        $this->setCreated(new \DateTime());
+        $this->setModified(new \DateTime());
     }
 
     public function getId()
@@ -154,6 +165,42 @@ class AdminUser implements UserInterface
         return null;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     * @return  $this
+     */
+    public function setCreated(\DateTime $created): AdminUser
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModified(): \DateTime
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param \DateTime $modified
+     * @return  $this
+     */
+    public function setModified(\DateTime $modified): AdminUser
+    {
+        $this->modified = $modified;
+        return $this;
+    }
+
     public function serialize()
     {
         return serialize(array(
@@ -172,5 +219,13 @@ class AdminUser implements UserInterface
             $this->password,
             $this->roles,
             ) = unserialize($serialized);
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateModifiedDatetime() {
+        $this->setModified(new \DateTime());
     }
 }
