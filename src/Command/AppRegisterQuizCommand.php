@@ -52,6 +52,7 @@ class AppRegisterQuizCommand extends Command
                 $section = new Section();
                 $section->setName($filename);
                 $section->setSlug($filename);
+                $section->setDescription('');
             }
 
             $config = new LexerConfig();

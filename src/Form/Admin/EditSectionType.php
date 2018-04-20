@@ -6,6 +6,7 @@ use App\Entity\Quiz;
 use App\Entity\Section;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,10 @@ class EditSectionType extends AbstractType
                 'label' => 'セクション名',
             ])
             ->add('slug', TextType::class, [
-                'label' => 'url',
+                'label' => 'URL',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => '解説',
             ])
         ;
     }

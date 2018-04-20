@@ -8,19 +8,32 @@
     一問一答 <small class="text-muted">{{ section.name }}</small>
 {% endblock %}
 
-{% block main %}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="{{ path('front_index') }}">ホーム</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{{ path('quiz_index') }}">一問一答</a>
+    </li>
+    <li class="breadcrumb-item active">{{ section.name }}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
     {% for quiz in section.quizzes %}
         <div class="card mb-3">
-            <div class="card-header">
-                問題 {{ loop.index }}
+            <div class="card-header cyan text-white">
+                問題 {{ loop.index }}: 次の問題をGHCIに入力した時の出力を答えよ．
             </div>
-            <div class="card-body">
+            <div class="card-body text-center">
                 <div class="alert-area-{{ quiz.id }}"></div>
                 <p>
                     {{ quiz.quizText }}
                 </p>
 
                 {% set form = formObject.createView %}
+                {% form_theme form 'Front/form/theme.html.twig' %}
                 {{ form_start(form, {action: path('quiz_grading', {id: quiz.id})}) }}
                 {{ form_rest(form) }}
                 <button class="btn btn-primary submit-button">送信</button>

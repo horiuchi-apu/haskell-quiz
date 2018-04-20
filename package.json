@@ -16,6 +16,7 @@
         "build": "encore production"
     },
     "dependencies": {
+        "mdbootstrap": "^4.5.1",
         "popper.js": "^1.14.3"
     }
 }

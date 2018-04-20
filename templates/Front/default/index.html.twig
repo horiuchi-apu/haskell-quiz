@@ -1,20 +1,31 @@
 {% extends 'Front/layout.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Haskell Quiz/Home{% endblock %}
+{% block body_class %}pt-5 fixed-sn mdb-skin-custom{% endblock %}
+{% block main %}
+    <h1 class="front-Top_Header display-4">
+        <img src="{{ asset('img/Haskell-Logo.png') }}">
+        <span class="front-Top_Header-text cyan-text">Haskell Quiz</span>
+    </h1>
+    <hr class="my-5">
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>src/Controller/DefaultController.php</code></li>
-        <li>Your template at <code>templates/default/index.html.twig</code></li>
-    </ul>
-</div>
+    <section class="section">
+        <div class="row">
+            {% for section in sections %}
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="card card-cascade">
+                        <div class="text-center card-header cyan-gradient">
+                            <h2 class="h2-responsive card-header-title mt-3 mb-4">{{ section.name }}</h2>
+                        </div>
+                        <div class="card-body text-center">
+                            <p>{{ section.description }}</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a class="btn btn-primary btn-rounded waves-effect waves-light" href="{{ path('quiz_section', {slug: section.slug}) }}">GO!</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
