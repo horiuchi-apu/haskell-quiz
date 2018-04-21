@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Answer;
 use App\Entity\Quiz;
+use App\Entity\Section;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -18,5 +22,22 @@ class QuizRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Quiz::class);
+    }
+
+    public function getUserAnsweredCount(User $user, Section $section = null)
+    {
+        $qb = $this->createQueryBuilder('quiz')
+            ->select('count(quiz)')
+            ->leftJoin('quiz.answers', 'answers')
+            ->where('answers.user=:user')
+            ->setParameter('user', $user)
+        ;
+
+        if ($section) {
+            $qb->andWhere('quiz.section=:section')
+                ->setParameter('section', $section);
+        }
+
+        return $qb->getQuery()->getResult()[0][1];
     }
 }
