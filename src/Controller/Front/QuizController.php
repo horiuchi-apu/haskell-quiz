@@ -6,6 +6,7 @@ use App\Entity\Answer;
 use App\Entity\Quiz;
 use App\Entity\Section;
 use App\Form\Front\CreateAnswerType;
+use App\Repository\SectionRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +24,12 @@ class QuizController extends Controller
     /**
      * @Route("/", name="quiz_index")
      */
-    public function index()
+    public function index(SectionRepository $repository)
     {
-        return $this->render('Front/quiz/index.html.twig', []);
+        $sections = $repository->findAll();
+        return $this->render('Front/quiz/index.html.twig', [
+            'sections' => $sections
+        ]);
     }
 
     /**
