@@ -3,6 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Answer;
+use App\Entity\Quiz;
+use App\Entity\User;
+use Carbon\Carbon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,16 +22,27 @@ class AnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, Answer::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function isContinuousPost(Answer $answer, User $user, Quiz $quiz)
     {
-        return $this->createQueryBuilder('a')
-            ->where('a.something = :value')->setParameter('value', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->createQueryBuilder('answer')
+            ->andWhere('answer.user=:user')
+            ->andWhere('answer.quiz=:quiz')
+            ->setParameter('user', $user)
+            ->setParameter('quiz', $quiz)
+            ->orderBy('answer.created', 'DESC')
+            ->setMaxResults(1)
         ;
+
+
+        $result = $qb->getQuery()->getResult();
+        if (empty($result)) {
+            return false;
+        }
+
+        /** @var Answer $result */
+        $result = $result[0];
+        $limit = Carbon::now()->addMinute(-1);
+
+        return $result->getAnswerText() == $answer->getAnswerText() && $result->getCreated() > $limit;
     }
-    */
 }

@@ -58,6 +58,15 @@ class QuizController extends Controller
             $answer = new Answer();
             $form = $this->createForm(CreateAnswerType::class, $answer);
             $form->handleRequest($request);
+
+            if ($this->isContinuousPost($answer, $quiz)) {
+                return new JsonResponse([
+                    'quizId' => $quiz->getId(),
+                    'message' => '連続投稿は禁止です',
+                    'status' => 'danger',
+                ]);
+            }
+
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $user = $this->getUser();
@@ -72,16 +81,26 @@ class QuizController extends Controller
                 return new JsonResponse([
                     'quizId' => $quiz->getId(),
                     'message' => $answer->getMessage(),
-                    'isRight' => $answer->isRight(),
+                    'status' =>  $answer->isRight()? 'success': 'danger',
                 ]);
             }
         }
 
         return new JsonResponse([
             'quizId' => $quiz->getId(),
-            'message' => 'エラーが発生しました。'
-        ], 500);
+            'message' => 'エラーが発生しました。',
+            'status' => 'danger',
+        ]);
     }
 
+
+    // 連続投稿禁止のための暫定処置
+    private function isContinuousPost(Answer $answer, $quiz)
+    {
+        $repo = $this->getDoctrine()->getRepository(Answer::class);
+        $user = $this->getUser();
+
+        return $repo->isContinuousPost($answer, $user, $quiz);
+    }
 
 }
