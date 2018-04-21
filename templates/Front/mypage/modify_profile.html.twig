@@ -1,0 +1,32 @@
+{% extends 'Front/mypage/layout.html.twig' %}
+
+{% block title %}マイページ/プロフィール編集{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('front_index') }}">ホーム</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ path('front_mypage') }}">マイページ</a>
+        </li>
+        <li class="breadcrumb-item active">プロフィール編集</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(form) }}
+                {{ form_rest(form) }}
+                <div class="text-center">
+                    <button class="btn btn-primary waves-effect">送信</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+

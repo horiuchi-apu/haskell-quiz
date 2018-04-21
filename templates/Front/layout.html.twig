@@ -10,6 +10,10 @@
 
 {% block body_class %}pt-5{% endblock %}
 
+{% if form is defined %}
+    {% form_theme form 'Front/form/theme.html.twig' %}
+{% endif %}
+
 {% block body %}
     <nav class="fixed-top mb-3 navbar navbar-expand-lg navbar-dark cyan">
         <a class="navbar-brand" href="{{ path('front_index') }}">
@@ -21,7 +25,7 @@
         <div class="collapse navbar-collapse" id="frontTopNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-container="body" data-toggle="popover" data-placement="bottom" data-content="準備中だよ!">マイページ</a>
+                    <a class="nav-link" href="{{ path('front_mypage') }}">マイページ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('front_logout') }}">ログアウト</a>
@@ -33,22 +37,6 @@
     <main class="mt-5">
         <div class="container">
             {% block main %}
-                <h1 class="text-center display-4">
-                    {% block page_header %}{% endblock %}
-                </h1>
-                <hr class="my-5">
-                <div class="row">
-                    <div class="col-md-2 col-sm-12">
-                        {% block side %}
-                        {% endblock %}
-                    </div>
-                    <div class="col-md-10 col-sm-12">
-                        {% block breadcrumb %}
-                        {% endblock %}
-                        {% block content %}
-                        {% endblock %}
-                    </div>
-                </div>
             {% endblock %}
         </div>
     </main>

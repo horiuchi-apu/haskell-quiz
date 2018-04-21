@@ -1,0 +1,59 @@
+{% extends 'Front/layout.html.twig' %}
+
+{% block title %}マイページ{% endblock %}
+
+{% block main %}
+    <h1 class="text-center display-4">
+        マイページ
+    </h1>
+    <hr class="my-5">
+    {% for flashType,flashMessages in app.session.flashBag.all %}
+        {% for flashMessage in flashMessages %}
+            <div class="alert alert-{{ flashType }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="row mb-1">
+        <div class="col-12">
+            {% block breadcrumb %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            {% block side %}
+                <div class="mb-3">
+                    <div class="card">
+                        <div class="card-body cyan-gradient">
+                            <div class="front-Mypage_Detail-avatar">
+                                <img src="{{ asset('img/person.png') }}">
+                            </div>
+                            <h4 class="card-title text-center">
+                                {{ user.nickname }}
+                            </h4>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <td>{{ user.username }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-right">
+                                <a href="{{ path('front_edit_profile') }}">編集</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+        <div class="col-md-9 col-sm-12">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+

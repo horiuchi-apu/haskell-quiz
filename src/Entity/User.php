@@ -47,6 +47,11 @@ class User implements AdvancedUserInterface
      */
     private $plainPassword;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $nickname;
 
     /**
      * @var string
@@ -176,6 +181,24 @@ class User implements AdvancedUserInterface
     /**
      * @return string
      */
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * @param string $nickname
+     * @return $this
+     */
+    public function setNickname(string $nickname): User
+    {
+        $this->nickname = $nickname;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getConfirmToken(): ?string
     {
         return $this->confirmToken;
@@ -212,7 +235,7 @@ class User implements AdvancedUserInterface
     /**
      * @return ArrayCollection
      */
-    public function getAnswers(): ArrayCollection
+    public function getAnswers()
     {
         return $this->answers;
     }
@@ -364,5 +387,27 @@ class User implements AdvancedUserInterface
      */
     public function updateModifiedDatetime() {
         $this->setModified(new \DateTime());
+    }
+
+    /**
+     * @param Section|null $section
+     * @return ArrayCollection
+     */
+    public function getCorrectAnswers(Section $section = null)
+    {
+        return $this->getAnswers()->filter(function (Answer $answer) use ($section) {
+            return $section? $answer->isRight() && $answer->getQuiz()->getSection() === $section: $answer->isRight();
+        });
+    }
+
+    /**
+     * @param Section|null $section
+     * @return ArrayCollection
+     */
+    public function getUnCorrectAnswers(Section $section = null)
+    {
+        return $this->getAnswers()->filter(function (Answer $answer) use ($section) {
+            return $section? !$answer->isRight() && $answer->getQuiz()->getSection() === $section: !$answer->isRight();
+        });
     }
 }

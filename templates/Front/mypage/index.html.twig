@@ -1,0 +1,73 @@
+{% extends 'Front/mypage/layout.html.twig' %}
+
+{% block title %}マイページ{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('front_index') }}">ホーム</a>
+        </li>
+        <li class="breadcrumb-item active">マイページ</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h2 class="text-center">
+            回答状況
+        </h2>
+        {% for section in sections %}
+            <div class="card mb-3">
+                <div class="text-center card-header rgba-cyan-light">
+                    <h4>
+                        {{ section.name }}
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="Front-Mypage_Answered-header cyan lighten-3">
+                                回答率
+                            </h4>
+                            <div class="Front-Mypage_Answered-text">
+                                <span>{{ get_user_answered_count(user, section) }}問</span>
+                                <span>/</span>
+                                <span>{{ section.quizzes.count }}問中</span>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="Front-Mypage_Answered-chart">
+                                <canvas id="chart-{{ section.id }}"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% for section in sections %}
+        <script>
+            var chart = document.getElementById("chart-{{ section.id }}").getContext('2d');
+            new Chart(chart, {
+                type: 'pie',
+                data: {
+                    labels: ["正解", "不正解"],
+                    datasets: [
+                        {
+                            data: [{{ user.getCorrectAnswers(section).count }}, {{ user.getUnCorrectAnswers(section).count }}],
+                            backgroundColor: ["#d4edda", "#f8d7da"],
+                            hoverBackgroundColor: ["#c9e1cf", "#e6c7ca"]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        </script>
+    {%  endfor %}
+{% endblock %}
