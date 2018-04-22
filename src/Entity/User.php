@@ -49,7 +49,7 @@ class User implements AdvancedUserInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $nickname;
 
