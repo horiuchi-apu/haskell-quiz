@@ -40,4 +40,18 @@ class QuizRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult()[0][1];
     }
+
+    /**
+     * @param $name
+     * @return Quiz|null
+     */
+    public function findByLikeFunctionName($name)
+    {
+        $qb = $this->createQueryBuilder('quiz')
+            ->where('quiz.quizText LIKE :name')
+            ->setParameter('name', '%'. $name .'%')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

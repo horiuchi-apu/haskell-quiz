@@ -1,0 +1,1 @@
+58	quicksort	quicksort :: (Ord a) => [a] -> [a]\nquicksort [] = []\nquicksort (x:xs) =\n let smallerOrEqual = [a | a <- xs, a <= x]\n  larger = [a | a <- xs, a > x]\n in quicksort smallerOrEqual ++ [x] ++ quicksort larger

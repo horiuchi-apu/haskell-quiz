@@ -106,6 +106,19 @@ class MenuBuilder
             ]
         ]);
 
+        $menu->addChild('関数情報一覧', [
+            'route' => 'admin_function_info_index',
+            'attributes' => [
+                'class' => 'nav-item',
+            ],
+            'linkAttributes' => [
+                'class' => 'nav-link'
+            ],
+            'extras' => [
+                'icon' => 'description'
+            ]
+        ]);
+
         $menu->addChild('解答一覧', [
             'route' => 'admin_answer_index',
             'attributes' => [

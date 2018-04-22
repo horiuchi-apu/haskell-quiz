@@ -1,0 +1,4 @@
+37	charName	charName :: Char -> String\ncharName 'a' = "Albert"\ncharName 'b' = "Broseph"\ncharName 'c' = "Cecil"
+39	head'	head' :: [a] -> a\nhead' [] = error "Can't call head on an empty list, dummy!"\nhead' (x:_) = x
+42	bmiTell'	bmiTell :: Double -> Double -> String\nbmiTell weight height\n | weight / height ^ 2 <= 18.5 = "You're underweight, you emo, you!"\n | weight / height ^ 2 <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"\n | weight / height ^ 2 <= 30.0 = "You're fat! Lose some weight, fatty!"\n | otherwise　　　　　　　　= "You're a whale, congratulations!"
+42	myCompare	myCompare :: (Ord a) => a -> a -> Ordering\na `myCompare` b\n | a > b 　　= GT\n | a == b 　 = EQ\n | otherwise = LT

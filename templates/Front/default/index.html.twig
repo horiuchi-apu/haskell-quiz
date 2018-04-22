@@ -9,8 +9,36 @@
     </h1>
     <hr class="my-5">
 
-    <section class="section">
+    <section class="mb-5">
         <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <p>
+                            「すごいHaskellたのしく学ぼう!」に載っている関数のリストをQuiz形式でまとめたものです。
+                        </p>
+                        <p>
+                            標準ライブラリではない関数については<a href="{{ path('front_functions') }}">関数リファレンス</a>を参考にしてください。
+                        </p>
+                        <p>
+                            不要な空白は入れないでください。
+                            (例)
+                            × [1, 2, 3]
+                            ○ [1,2,3]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h1 class="front-Top_SectionHeader cyan lighten-5">
+                    クイズ
+                </h1>
+            </div>
             {% for section in sections %}
                 <div class="col-lg-4 col-md-12 mb-4">
                     <div class="card card-cascade">
