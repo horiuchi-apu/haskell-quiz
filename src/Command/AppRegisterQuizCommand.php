@@ -76,7 +76,7 @@ class AppRegisterQuizCommand extends Command
             $em->persist($section);
             $em->flush();
 
-            $lexer->parse(__DIR__ . "/../../quiz/" . $filename, $interpreter);
+            $lexer->parse(__DIR__ . "/../../seeds/quiz/" . $filename, $interpreter);
         }
 
 
