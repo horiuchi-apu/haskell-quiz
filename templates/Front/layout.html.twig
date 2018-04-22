@@ -22,6 +22,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#frontTopNav" aria-controls="frontTopNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {% if is_granted('ROLE_USER') %}
         <div class="collapse navbar-collapse" id="frontTopNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -32,6 +33,7 @@
                 </li>
             </ul>
         </div>
+        {% endif %}
     </nav>
 
     <main class="mt-5">
