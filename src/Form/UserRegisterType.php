@@ -17,7 +17,7 @@ class UserRegisterType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => '学籍番号'
+                'label' => 'ID'
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,

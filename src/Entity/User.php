@@ -31,7 +31,7 @@ class User implements AdvancedUserInterface
      * @ORM\Column(type="string", unique=true)
      * @Assert\Regex(
      *     pattern="/^is\d{6}$/",
-     *     message="学籍番号が正しくありません"
+     *     message="IDは isXXXXXX の形式で入力してください"
      * )
      */
     private $username;
