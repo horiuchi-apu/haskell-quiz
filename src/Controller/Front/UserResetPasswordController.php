@@ -107,6 +107,7 @@ class UserResetPasswordController extends Controller
 
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
+            $user->setIsEnabled(true);
             $user->setConfirmToken('');
             $user->setConfirmTokenLimit(null);
 
