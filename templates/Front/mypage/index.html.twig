@@ -14,7 +14,7 @@
 {% block content %}
     <section>
         <h2 class="text-center">
-            回答状況
+            解答状況
         </h2>
         {% for section in sections %}
             <div class="card mb-3">
@@ -28,7 +28,7 @@
                         <div class="col-md-5">
                             <div class="mb-4">
                                 <h4 class="Front-Mypage_Answered-header cyan lighten-5">
-                                    回答率
+                                    解答率
                                 </h4>
                                 <div class="Front-Mypage_Answered-text">
                                     <span>{{ get_user_answered_count(user, section) }} 問</span>
