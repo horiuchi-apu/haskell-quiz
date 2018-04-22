@@ -2,8 +2,8 @@
 
 namespace App\Command;
 
+use App\Entity\FunctionInfo;
 use App\Entity\Quiz;
-use App\Entity\Section;
 use Doctrine\ORM\EntityManagerInterface;
 use Goodby\CSV\Import\Standard\Interpreter;
 use Goodby\CSV\Import\Standard\Lexer;
@@ -11,13 +11,12 @@ use Goodby\CSV\Import\Standard\LexerConfig;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class AppRegisterQuizCommand extends Command
+class AppRegisterFunctionInfoCommand extends Command
 {
-    protected static $defaultName = 'app:register-quiz';
+    protected static $defaultName = 'app:register-function-info';
 
     /**
      * @var EntityManagerInterface
@@ -33,9 +32,8 @@ class AppRegisterQuizCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('register quiz')
+            ->setDescription('register functionInfo')
             ->addArgument('filename', InputArgument::REQUIRED, 'filename')
-//            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
 
@@ -46,40 +44,38 @@ class AppRegisterQuizCommand extends Command
 
         if ($filename) {
             $em = $this->em;
-
-            $section = $em->getRepository(Section::class)->findOneBy(['slug' => $filename]);
-            if (empty($section)) {
-                $section = new Section();
-                $section->setName($filename);
-                $section->setSlug($filename);
-                $section->setDescription('');
-            }
+            $quizRepo = $em->getRepository(Quiz::class);
 
             $config = new LexerConfig();
             $config->setDelimiter("\t");
             $lexer = new Lexer($config);
 
             $interpreter = new Interpreter();
-            $interpreter->addObserver(function(array $columns) use ($em, $section) {
-                $quiz = new Quiz();
+            $interpreter->addObserver(function(array $columns) use ($em, $quizRepo) {
+                $name = $columns[1];
+                $Info = $columns[2];
 
-                $quiz->setPage($columns[1]);
-                $quiz->setQuizText($columns[2]);
-                $quiz->setAnswerText($columns[3]);
+                $function = new FunctionInfo();
+                $function->setName($name);
+                $function->setDescription($Info);
 
-                $section->addQuiz($quiz);
+                $quizzes = $quizRepo->findByLikeFunctionName($name);
+                if ($quizzes) {
+                    /** @var Quiz $quiz */
+                    foreach ($quizzes as $quiz) {
+                        $quiz->addFunctionInfo($function);
+                        $em->persist($quiz);
+                    }
+                }
 
-                $em->persist($quiz);
+                $em->persist($function);
                 $em->flush();
             });
 
-            $em->persist($section);
-            $em->flush();
-
-            $lexer->parse(__DIR__ . "/../../quiz/" . $filename, $interpreter);
+            $lexer->parse(__DIR__ . "/../../seeds/function/" . $filename, $interpreter);
         }
 
 
-        $io->success('問題データの登録が完了しました。');
+        $io->success('関数データの登録が完了しました。');
     }
 }

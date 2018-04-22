@@ -1,0 +1,2 @@
+25	factorial	factorial :: Integer -> Integer\nfactorial n = product [1..n]
+25	circumference	circumference :: Float -> Float\ncircumference r = 2 * pi * r

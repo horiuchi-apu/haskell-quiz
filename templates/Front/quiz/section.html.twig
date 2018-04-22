@@ -1,43 +1,76 @@
 {% extends 'Front/quiz/layout.html.twig' %}
 
 {% block title %}
-    一問一答/{{ section.name }}
+    クイズ/{{ section.name }}
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendor/highlight.js/css/github.css') }}">
+{% endblock %}
 {% block page_header %}
-    一問一答 <small class="text-muted">{{ section.name }}</small>
+    クイズ <small class="text-muted">{{ section.name }}</small>
 {% endblock %}
 
 {% block breadcrumb %}
-<ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <a href="{{ path('front_index') }}">ホーム</a>
-    </li>
-    <li class="breadcrumb-item">
-        <a href="{{ path('quiz_index') }}">一問一答</a>
-    </li>
-    <li class="breadcrumb-item active">{{ section.name }}</li>
-</ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('front_index') }}">ホーム</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ path('quiz_index') }}">クイズ</a>
+        </li>
+        <li class="breadcrumb-item active">{{ section.name }}</li>
+    </ol>
 {% endblock %}
 
 {% block content %}
     {% for quiz in section.quizzes %}
         <div class="card mb-3">
-            <div class="card-header cyan text-white">
-                問題 {{ loop.index }}: 次の問題をGHCIに入力した時の出力を答えよ．
+            <div class="card-header cyan">
+                <div class="tabs-wrapper">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item">
+                            <a class="white-text nav-link waves-light active" data-toggle="tab" href="#card-body-{{ quiz.id }}-quiz" role="tab">問題</a>
+                        </li>
+                        {% if quiz.hasFunctionInfo %}
+                            <li class="nav-item">
+                                <a class="white-text nav-link waves-light" data-toggle="tab" href="#card-body-{{ quiz.id }}-description" role="tab">関数の説明</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <div class="card-body text-center">
-                <div class="alert-area-{{ quiz.id }}"></div>
-                <p>
-                    {{ quiz.quizText }}
-                </p>
+            <div class="tab-content card-body">
+                <div class="tab-pane fade in active show" id="card-body-{{ quiz.id }}-quiz" role="tabpanel">
+                    <div class="alert-area-{{ quiz.id }}"></div>
+                    <p>
+                        {{ quiz.quizText }}
+                    </p>
 
-                {% set form = formObject.createView %}
-                {% form_theme form 'Front/form/theme.html.twig' %}
-                {{ form_start(form, {action: path('quiz_grading', {id: quiz.id})}) }}
-                {{ form_rest(form) }}
-                <button class="btn btn-primary submit-button">送信</button>
-                {{ form_end(form) }}
+                    {% set form = formObject.createView %}
+                    {% form_theme form 'Front/form/theme.html.twig' %}
+                    {{ form_start(form, {action: path('quiz_grading', {id: quiz.id})}) }}
+                    {{ form_rest(form) }}
+                    <button class="btn btn-primary submit-button">送信</button>
+                    {{ form_end(form) }}
+                </div>
+                {% if quiz.hasFunctionInfo %}
+                    <div class="tab-pane fade" id="card-body-{{ quiz.id }}-description" role="tabpanel">
+                        {% for function in quiz.functionInfos %}
+                            <div>
+                                <h4>
+                                    {{ function.name }}
+                                </h4>
+<pre>
+<code class="haskell">
+{{ function.description }}
+</code>
+</pre>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
@@ -45,6 +78,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('vendor/highlight.js/js/highlight.pack.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <script>
         $('.submit-button').click(function (e) {
             e.preventDefault();

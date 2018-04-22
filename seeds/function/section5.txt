@@ -1,0 +1,11 @@
+62	multThree	multThree :: Int -> Int -> Int -> Int\nmultThree x y z = x * y * z
+63	multTwoWithNine	multTwoWithNine = multThree 9\ncompareWithHundred\ncompareWithHundred :: Int -> Ordering\ncompareWithHundred x = compare 100 x
+64	divideByTen	divideByTen :: (Floating a) => a -> a\ndivideByTen = (/10)
+65	applyTwice	applyTwice :: (a -> a) -> a -> a\napplyTwice f x = f (f x)
+66	zipWith'	zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]\nzipWith' _ [] _ = []\nzipWith' _ _ [] = [] zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+67	flip'	flip' :: (a -> b -> c) -> (b -> a -> c)\nflip' f = g\n where g x y = f y x
+72	chain	chain :: (Integral a) => a -> [a]\nchain 1 = [1]\nchain n\n | even n = n : chain (n `div` 2)\n | odd n = n : chain (n*3 + 1)
+72	listOfFuns	listOfFuns = map (*) [0..]
+76	sum'	sum' :: (Num a) => [a] -> a\nsum' xs = foldl (\acc x -> acc + x) 0 xs
+81	and'	and' :: [Bool] -> Bool and' xs = foldr (&&) True xs
+82	sqrtSums	sqrtSums :: Int sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
