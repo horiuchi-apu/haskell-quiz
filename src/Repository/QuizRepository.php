@@ -27,7 +27,7 @@ class QuizRepository extends ServiceEntityRepository
     public function getUserAnsweredCount(User $user, Section $section = null)
     {
         $qb = $this->createQueryBuilder('quiz')
-            ->select('count(quiz)')
+            ->select('COUNT(DISTINCT(quiz))')
             ->leftJoin('quiz.answers', 'answers')
             ->where('answers.user=:user')
             ->setParameter('user', $user)

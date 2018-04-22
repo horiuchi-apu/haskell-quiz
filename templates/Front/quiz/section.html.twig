@@ -63,12 +63,8 @@
             }).done(function(data) {
                 var area = $('.alert-area-' + data.quizId);
                 area.empty();
+                area.prepend('<div class="alert alert-' + data.status + '">' + data.message + '</div>');
 
-                if (data.isRight) {
-                    area.prepend('<div class="alert alert-success">' + data.message + '</div>');
-                } else {
-                    area.prepend('<div class="alert alert-danger">' + data.message + '</div>');
-                }
             }).fail(function(data) {
                 var area = $('.alert-area-' + data.quizId);
                 area.empty();

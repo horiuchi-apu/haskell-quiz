@@ -1,7 +1,33 @@
 {% extends 'Front/layout.html.twig' %}
 
-{% block side %}
-    <div class="mb-4">
-        {{ knp_menu_render('quiz_section', {currentClass: 'active', template: 'Front/menu/SectionSideMenu.html.twig'}) }}
+{% block main %}
+    <h1 class="text-center display-4">
+        {% block page_header %}{% endblock %}
+    </h1>
+    <hr class="my-4">
+    {% for flashType,flashMessages in app.session.flashBag.all %}
+        {% for flashMessage in flashMessages %}
+            <div class="alert alert-{{ flashType }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="row mb-1">
+        <div class="col-12">
+            {% block breadcrumb %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-12">
+            <div class="mb-4">
+                {{ knp_menu_render('quiz_section', {currentClass: 'active', template: 'Front/menu/SectionSideMenu.html.twig'}) }}
+            </div>
+        </div>
+        <div class="col-md-10 col-sm-12">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
 {% endblock %}

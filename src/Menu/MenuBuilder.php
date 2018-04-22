@@ -51,7 +51,7 @@ class MenuBuilder
                     'slug' => $section->getSlug()
                 ],
                 'attributes' => [
-                    'class' => 'list-group-item list-group-item-action text-center',
+                    'class' => 'list-group-item list-group-item-action waves-effect text-center',
                 ],
             ])
             ;

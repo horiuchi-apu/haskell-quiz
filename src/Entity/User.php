@@ -31,7 +31,7 @@ class User implements AdvancedUserInterface
      * @ORM\Column(type="string", unique=true)
      * @Assert\Regex(
      *     pattern="/^is\d{6}$/",
-     *     message="学籍番号が正しくありません"
+     *     message="IDは isXXXXXX の形式で入力してください"
      * )
      */
     private $username;
@@ -390,13 +390,25 @@ class User implements AdvancedUserInterface
     }
 
     /**
+     * @param Section $section
+     * @return ArrayCollection
+     */
+    public function getSectionAnswers(Section $section)
+    {
+        return $this->getAnswers()->filter(function (Answer $answer) use ($section) {
+            return $answer->getQuiz()->getSection() === $section;
+        });
+    }
+
+    /**
      * @param Section|null $section
      * @return ArrayCollection
      */
     public function getCorrectAnswers(Section $section = null)
     {
-        return $this->getAnswers()->filter(function (Answer $answer) use ($section) {
-            return $section? $answer->isRight() && $answer->getQuiz()->getSection() === $section: $answer->isRight();
+        $answers = $section? $this->getSectionAnswers($section): $this->getAnswers();
+        return $answers->filter(function (Answer $answer) use ($section) {
+            return $answer->isRight();
         });
     }
 
@@ -406,8 +418,9 @@ class User implements AdvancedUserInterface
      */
     public function getUnCorrectAnswers(Section $section = null)
     {
-        return $this->getAnswers()->filter(function (Answer $answer) use ($section) {
-            return $section? !$answer->isRight() && $answer->getQuiz()->getSection() === $section: !$answer->isRight();
+        $answers = $section? $this->getSectionAnswers($section): $this->getAnswers();
+        return $answers->filter(function (Answer $answer) use ($section) {
+            return !$answer->isRight();
         });
     }
 }
