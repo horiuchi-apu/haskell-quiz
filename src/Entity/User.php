@@ -30,7 +30,7 @@ class User implements AdvancedUserInterface
      * @var string
      * @ORM\Column(type="string", unique=true)
      * @Assert\Regex(
-     *     pattern="/^is\d{6}$/",
+     *     pattern="/^is\d{6}|im\d{6}|id\d{6}$/",
      *     message="IDは isXXXXXX の形式で入力してください"
      * )
      */
@@ -73,6 +73,12 @@ class User implements AdvancedUserInterface
 
     /**
      * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $isEditable = false;
+
+    /**
+     * @var bool
      * @ORM\Column(type="boolean", nullable=false)
      */
     private $isEnabled;
@@ -110,13 +116,14 @@ class User implements AdvancedUserInterface
      */
     private $modified;
 
-    public function __construct()
+    public function __construct(bool $isEditable = false)
     {
         $this->setRoles(['ROLE_USER']);
         $this->setIsEnabled(false);
         $this->answers = new ArrayCollection();
         $this->setCreated(new \DateTime());
         $this->setModified(new \DateTime());
+        $this->isEditable = $isEditable;
     }
 
     public function getId()
@@ -248,6 +255,14 @@ class User implements AdvancedUserInterface
     {
         $this->answers = $answers;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEditable(): bool
+    {
+        return $this->isEditable;
     }
 
     /**

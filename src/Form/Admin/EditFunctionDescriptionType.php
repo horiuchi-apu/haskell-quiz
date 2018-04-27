@@ -20,7 +20,8 @@ class EditFunctionDescriptionType extends AbstractType
                 'label' => '関数名'
             ])
             ->add('description', TextareaType::class, [
-                'label' => '関数'
+                'label' => '関数',
+                'attr' => ['rows' => '10'],
             ])
         ;
     }

@@ -154,4 +154,9 @@ class FunctionInfo
     public function updateModifiedDatetime() {
         $this->setModified(new \DateTime());
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

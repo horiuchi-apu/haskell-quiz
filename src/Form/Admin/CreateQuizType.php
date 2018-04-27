@@ -2,10 +2,12 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\FunctionInfo;
 use App\Entity\Quiz;
 use App\Entity\Section;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,6 +29,32 @@ class CreateQuizType extends AbstractType
             ->add('section', EntityType::class, [
                 'label' => false,
                 'class' => Section::class
+            ])
+            ->add('functionInfos', CollectionType::class, [
+                'label' => '関数情報',
+                'allow_add' => true,
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'class' => FunctionInfo::class
+                ],
+                'required' => false,
+            ])
+            ->add('functionInfos', CollectionType::class, [
+                'label' => '関数情報',
+                'required' => false,
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'class' => FunctionInfo::class,
+                    'label' => false,
+                    'placeholder' => false,
+                    'empty_data' => false
+                ],
+                'attr' => [
+                    'class' => 'collection'
+                ]
             ])
         ;
     }

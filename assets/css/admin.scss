@@ -1,0 +1,20 @@
+.bmd-form-group {
+  .d-block {
+    display: inline!important;
+  }
+  .custom-select.is-invalid:focus,
+  .form-control.is-invalid:focus,
+  .was-validated .custom-select:invalid:focus,
+  .was-validated .form-control:invalid:focus {
+    border-color: #f44336;
+    box-shadow: none;
+  }
+  select[multiple] {
+    height: 150px!important;
+  }
+  legend.bmd-label-floating {
+    text-align: left!important;
+    margin-top: -35px!important;
+    padding: 0!important;
+  }
+}

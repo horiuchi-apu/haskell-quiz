@@ -69,7 +69,7 @@ class Quiz
     private $modified;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\FunctionInfo", mappedBy="quizzes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\FunctionInfo", mappedBy="quizzes", cascade={"persist"})
      */
     private $functionInfos;
 

@@ -9,28 +9,36 @@
             関数情報一覧
         </div>
         <div class="card-body">
+            <div class="d-flex align-items-center justify-content-end mb-1">
+                <a class="btn btn-primary" href="{{ path('admin_function_info_create') }}">新規登録</a>
+            </div>
+            {% for functionInfo in pagination %}
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">ID</h4>
+                        <p>{{ functionInfo.id }}</p>
+                        <hr>
+
+                        <h4 class="card-title">関数名</h4>
+                        <p>{{ functionInfo.name }}</p>
+                        <hr>
+
+                        <h4 class="card-title">定義</h4>
+                        <pre>
+<code class="haskell">
+{{ functionInfo.description }}
+</code>
+</pre>
+                        <hr>
+
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a rel="tooltip" class="btn btn-success" href="{{ path('admin_function_info_edit', {id: functionInfo.id}) }}"><i class="material-icons">mode_edit</i></a>
+                            <a rel="tooltip" class="btn btn-danger admin-quiz-delete-button" href="{{ path('admin_function_info_delete', {id: functionInfo.id}) }}"><i class="material-icons">delete</i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
             <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead class="text-primary">
-                    <tr>
-                        <th>ID</th>
-                        <th>関数名</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for functionInfo in pagination %}
-                        <tr {% if loop.index is odd %}class="color"{% endif %}>
-                            <td>{{ functionInfo.id }}</td>
-                            <td>{{ functionInfo.name }}</td>
-                            <td class="td-actions text-right">
-                                <a rel="tooltip" class="btn btn-success" href="{{ path('admin_function_info_edit', {id: functionInfo.id}) }}"><i class="material-icons">mode_edit</i></a>
-                                <a rel="tooltip" class="btn btn-danger admin-function-info-delete-button" href="{{ path('admin_function_info_delete', {id: functionInfo.id}) }}"><i class="material-icons">delete</i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
                 {{ knp_pagination_render(pagination) }}
             </div>
         </div>

@@ -4,6 +4,8 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{{ asset('vendor/material-dashboard/css/material-dashboard.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/highlight.js/css/github.css') }}">
 {% endblock %}
 
 {% block body_class %}{% endblock %}
@@ -101,4 +103,7 @@
     <script src="{{ asset('vendor/material-dashboard/js/plugins/bootstrap-notify.js') }}"></script>
     <script src="{{ asset('vendor/material-dashboard/js/bootstrap-material-design.min.js') }}"></script>
     <script src="{{ asset('vendor/material-dashboard/js/material-dashboard.js') }}"></script>
+    <script src="{{ asset('build/js/admin.js') }}"></script>
+    <script src="{{ asset('vendor/highlight.js/js/highlight.pack.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 {% endblock %}
