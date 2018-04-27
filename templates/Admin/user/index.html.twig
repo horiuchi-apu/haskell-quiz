@@ -9,12 +9,19 @@
             ユーザー一覧
         </div>
         <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+                <div>
+                    この画面から登録したユーザのみ編集可能です。
+                </div>
+                <a class="btn btn-primary" href="{{ path('admin_user_create') }}">新規登録</a>
+            </div>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>ID</th>
                         <th>メールアドレス</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,6 +29,11 @@
                         <tr {% if loop.index is odd %}class="color"{% endif %}>
                             <td>{{ user.id }}</td>
                             <td>{{ user.email }}</td>
+                            <td class="td-actions text-right">
+                                {% if user.editable %}
+                                    <a rel="tooltip" class="btn btn-success" href="{{ path('admin_user_edit', {id: user.id}) }}"><i class="material-icons">mode_edit</i></a>
+                                {% endif %}
+                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>

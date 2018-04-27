@@ -9,32 +9,49 @@
             問題一覧
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead class="text-primary">
-                    <tr>
-                        <th>ID</th>
-                        <th>セクション</th>
-                        <th>問題文</th>
-                        <th>答</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for quiz in pagination %}
-                        <tr {% if loop.index is odd %}class="color"{% endif %}>
-                            <td>{{ quiz.id }}</td>
-                            <td>{{ quiz.section }}</td>
-                            <td>{{ quiz.quizText }}</td>
-                            <td>{{ quiz.answerText }}</td>
-                            <td class="td-actions text-right">
+            <div class="d-flex align-items-center justify-content-end mb-1">
+                <a class="btn btn-primary" href="{{ path('admin_quiz_create') }}">新規登録</a>
+            </div>
+                {% for quiz in pagination %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">ID</h4>
+                            <p>{{ quiz.id }}</p>
+                            <hr>
+
+                            <h4 class="card-title">セクション</h4>
+                            <p><a target="_blank" href="{{ path('admin_section_edit', {id: quiz.section.id}) }}">{{ quiz.section }}</a></p>
+                            <hr>
+
+                            <h4 class="card-title">問題</h4>
+                            <p>{{ quiz.quizText }}</p>
+                            <hr>
+
+                            {% if quiz.hasFunctionInfo %}
+                                <h4 class="card-title">関数情報</h4>
+                                {% for functionInfo in quiz.functionInfos %}
+                                    <a target="_blank" href="{{ path('admin_function_info_edit', {id: functionInfo.id}) }}">
+<pre>
+<code class="haskell">
+{{ functionInfo.description }}
+</code>
+</pre>
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+
+                            <h4 class="card-title">答</h4>
+                            <p>{{ quiz.answerText }}</p>
+                            <hr>
+
+                            <div class="d-flex justify-content-center align-items-center">
                                 <a rel="tooltip" class="btn btn-success" href="{{ path('admin_quiz_edit', {id: quiz.id}) }}"><i class="material-icons">mode_edit</i></a>
                                 <a rel="tooltip" class="btn btn-danger admin-quiz-delete-button" href="{{ path('admin_quiz_delete', {id: quiz.id}) }}"><i class="material-icons">delete</i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            <div class="table-responsive">
                 {{ knp_pagination_render(pagination) }}
             </div>
         </div>
