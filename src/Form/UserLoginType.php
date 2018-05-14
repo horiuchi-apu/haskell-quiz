@@ -14,7 +14,7 @@ class UserLoginType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => 'ID',
+                'label' => 'ID または メールアドレス',
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'パスワード'

@@ -11,8 +11,8 @@ class UserResetPasswordRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, [
-                'label' => 'ID'
+            ->add('email', TextType::class, [
+                'label' => 'メールアドレス'
             ])
         ;
     }

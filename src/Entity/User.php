@@ -29,12 +29,18 @@ class User implements AdvancedUserInterface
     /**
      * @var string
      * @ORM\Column(type="string", unique=true)
-     * @Assert\Regex(
-     *     pattern="/^is\d{6}|im\d{6}|id\d{6}$/",
-     *     message="IDは isXXXXXX の形式で入力してください"
-     * )
      */
     private $username;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", unique=true)
+     * @Assert\Regex(
+     *     pattern="/.+@cis.aichi-pu.ac.jp|.+@ist.aichi-pu.ac.jp|.+@yamamoto.ist.aichi-pu.ac.jp/",
+     *     message="愛知県立大学で配布されたメールアドレスのみ使用可能です"
+     * )
+     */
+    private $email;
 
     /**
      * @var string
@@ -146,6 +152,24 @@ class User implements AdvancedUserInterface
     public function setUsername(string $username): User
     {
         $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return  $this
+     */
+    public function setEmail(string $email): User
+    {
+        $this->email = $email;
         return $this;
     }
 
@@ -327,11 +351,6 @@ class User implements AdvancedUserInterface
     public function eraseCredentials()
     {
         return null;
-    }
-
-    public function getEmail()
-    {
-        return $this->getUsername() . "@cis.aichi-pu.ac.jp";
     }
 
     /**

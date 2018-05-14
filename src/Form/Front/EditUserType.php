@@ -18,6 +18,9 @@ class EditUserType extends AbstractType
             ->add('nickname', TextType::class, [
                 'label' => 'ニックネーム'
             ])
+            ->add('username', TextType::class, [
+                'label' => 'ID'
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options'  => [

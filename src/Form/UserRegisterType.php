@@ -19,6 +19,9 @@ class UserRegisterType extends AbstractType
             ->add('username', TextType::class, [
                 'label' => 'ID'
             ])
+            ->add('email', EmailType::class, [
+                'label' => 'メールアドレス'
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options'  => [
