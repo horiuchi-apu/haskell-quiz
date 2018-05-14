@@ -15,6 +15,11 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  *     errorPath="username",
  *     message="既に登録されています"
  * )
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     errorPath="email",
+ *     message="既に登録されています"
+ * )
  * @ORM\HasLifecycleCallbacks
  */
 class User implements AdvancedUserInterface
