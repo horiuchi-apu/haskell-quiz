@@ -32,10 +32,10 @@ class UserResetPasswordController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $username = $form->get('username')->getData();
+            $email = $form->get('email')->getData();
 
-            if (null === $user = $repository->findOneBy(['username' => $username])) {
-                $this->addFlash('danger', "学籍番号に謝りがあります");
+            if (null === $user = $repository->findOneBy(['email' => $email])) {
+                $this->addFlash('danger', "メールアドレスに謝りがあります");
             } else {
                 $this->get('session')->set(self::RESET_PASSWORD_KEY, $user);
                 return $this->redirectToRoute('user_reset_password_confirm');

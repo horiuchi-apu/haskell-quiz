@@ -3,9 +3,12 @@
 namespace App\Controller\Front;
 
 use App\Entity\Section;
+use App\Entity\User;
 use App\Form\Front\EditUserType;
 use App\Repository\SectionRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -40,6 +43,21 @@ class MypageController extends Controller
         $user = $this->getUser();
 
         $form = $this->createForm(EditUserType::class, $user);
+
+        if ($request->isMethod("POST")) {
+            /** @var UserRepository $repo */
+            $repo = $em->getRepository(User::class);
+            $username = $request->request->get('edit_user')['username'];
+            $loadedUser = $repo->findOneBy(['username' => $username]);
+            if ($loadedUser && $loadedUser != $user) {
+                $form->get('username')->addError(new FormError('既に使用されているIDです'));
+                return $this->render('Front/mypage/modify_profile.html.twig', [
+                    'user' => $user,
+                    'form' => $form->createView(),
+                ]);
+            }
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
