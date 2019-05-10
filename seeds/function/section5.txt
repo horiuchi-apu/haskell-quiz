@@ -1,5 +1,6 @@
 62	multThree	multThree :: Int -> Int -> Int -> Int\nmultThree x y z = x * y * z
-63	multTwoWithNine	multTwoWithNine = multThree 9\ncompareWithHundred\ncompareWithHundred :: Int -> Ordering\ncompareWithHundred x = compare 100 x
+63	multTwoWithNine	multTwoWithNine = multThree 9
+64	compareWithHundred	compareWithHundred :: Int -> Ordering\ncompareWithHundred x = compare 100 x
 64	divideByTen	divideByTen :: (Floating a) => a -> a\ndivideByTen = (/10)
 65	applyTwice	applyTwice :: (a -> a) -> a -> a\napplyTwice f x = f (f x)
 66	zipWith'	zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]\nzipWith' _ [] _ = []\nzipWith' _ _ [] = [] zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys

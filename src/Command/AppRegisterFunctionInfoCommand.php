@@ -53,7 +53,7 @@ class AppRegisterFunctionInfoCommand extends Command
             $interpreter = new Interpreter();
             $interpreter->addObserver(function(array $columns) use ($em, $quizRepo) {
                 $name = $columns[1];
-                $Info = $columns[2];
+                $Info = str_replace('\n', "\n", $columns[2]);
 
                 $function = new FunctionInfo();
                 $function->setName($name);
