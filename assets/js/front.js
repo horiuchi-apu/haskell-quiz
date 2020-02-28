@@ -1,1 +1,1 @@
-// require('mdbootstrap');
+import '../css/front.scss';

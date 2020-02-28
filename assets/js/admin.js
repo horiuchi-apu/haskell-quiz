@@ -1,2 +1,4 @@
-require('../../node_modules/symfony-collection/jquery.collection');
+import '../css/admin.scss';
+require('symfony-collection');
+
 $('.collection').collection();

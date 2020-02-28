@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\AdminUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
  */
 class AdminUserRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, AdminUser::class);
     }

@@ -8,7 +8,7 @@ use App\Entity\Section;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Quiz|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,7 +19,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class QuizRepository extends ServiceEntityRepository
 {
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Quiz::class);
     }
